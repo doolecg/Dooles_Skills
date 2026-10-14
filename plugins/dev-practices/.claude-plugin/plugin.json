@@ -1,0 +1,7 @@
+{
+  "name": "dev-practices",
+  "description": "General engineering workflow: planning, specs, TDD, review, debugging, git, CI/CD, security, performance and shipping.",
+  "author": {
+    "name": "doolecg"
+  }
+}

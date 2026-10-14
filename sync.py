@@ -1,6 +1,6 @@
 """Refresh this marketplace from where the skills are actually edited.
 
-    python sync.py              copy my own skills in from their home folders
+    python sync.py              copy my own skills in from their home folders (SOURCES + themes.json)
     python sync.py --upstream   also pin the third-party plugins to their repos' latest commit
     python sync.py --dry-run    show what would change
 
@@ -55,7 +55,13 @@ SOURCES = {
         (HOME / ".claude/skills/Minecraft Mod Dev", "minecraft-mod-dev"),
     ],
 }
-JUNK = shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store", "Thumbs.db")
+JUNK = shutil.ignore_patterns(
+    "__pycache__", "*.pyc", ".DS_Store", "Thumbs.db", "node_modules", ".git", ".venv",
+    ".env", ".env.*", "credentials.json", "token.json", "client_secret*.json",
+)
+# skills that come from the pinned third-party plugins in marketplace.json
+EXTERNAL = {"fabric-modding", "neoforge-modding", "minecraft-26-1-migration", "minecraft-multiloader"}
+SKILL_ROOTS = [HOME / ".claude/skills", HOME / ".agents/skills"]  # first one wins on a duplicate name
 
 
 def differs(a: Path, b: Path) -> bool:
@@ -89,6 +95,51 @@ def sync_own(dry: bool) -> int:
     return changed
 
 
+def find_skills() -> dict[str, Path]:
+    """Every skill folder in the source roots, one level of category folders included."""
+    found: dict[str, Path] = {}
+    for root in SKILL_ROOTS:
+        if not root.is_dir():
+            continue
+        for p in sorted(root.iterdir()):
+            if not p.is_dir():
+                continue
+            if (p / "SKILL.md").exists():
+                found.setdefault(p.name, p)
+                continue
+            for q in sorted(p.iterdir()):
+                if q.is_dir() and (q / "SKILL.md").exists():
+                    found.setdefault(q.name, q)
+    return found
+
+
+def sync_themes(dry: bool) -> int:
+    themes = json.loads((ROOT / "themes.json").read_text(encoding="utf8"))
+    found = find_skills()
+    provided = {name for skills in SOURCES.values() for _, name in skills}
+    assigned: set[str] = set()
+    changed = 0
+    for plugin, info in themes.items():
+        for name in info["skills"]:
+            assigned.add(name)
+            src = found.get(name)
+            if src is None:
+                print(f"  skip  {plugin}/{name}: not found in {', '.join(str(r) for r in SKILL_ROOTS)}")
+                continue
+            dest = ROOT / "plugins" / plugin / "skills" / name
+            if not differs(src, dest):
+                continue
+            changed += 1
+            print(f"  {'would update' if dry else 'update'}  {plugin}/{name}  <-  {src}")
+            if not dry:
+                shutil.rmtree(dest, ignore_errors=True)
+                shutil.copytree(src, dest, ignore=JUNK)
+    new = sorted(set(found) - assigned - provided - EXTERNAL)
+    if new:
+        print(f"  {len(new)} skill(s) in the sources but in no plugin (add to themes.json): {', '.join(new)}")
+    return changed
+
+
 def sync_upstream(dry: bool) -> int:
     path = ROOT / ".claude-plugin/marketplace.json"
     market = json.loads(path.read_text(encoding="utf8"))
@@ -114,6 +165,7 @@ def main() -> None:
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
     n = sync_own(a.dry_run)
+    n += sync_themes(a.dry_run)
     if a.upstream:
         n += sync_upstream(a.dry_run)
     print(f"{n} change(s)" + (" (dry run)" if a.dry_run else ""))

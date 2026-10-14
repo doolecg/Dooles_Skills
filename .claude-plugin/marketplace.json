@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "dooles-skills",
-  "description": "doolecg's Claude Code skills: BlockDesigner, Claude Agent Viewer and Operant releases, Operant control, voxel icons, Minecraft modding, UI design and how I work.",
+  "description": "doolecg's Claude Code skills: BlockDesigner, Claude Agent Viewer and Operant releases, voxel icons, Minecraft modding, UI design and how I work, plus a backup of the rest of my skills grouped by theme (Google Workspace, SEO, UX, dev practices, web and cloud, AI and agents, media, games, lessons).",
   "owner": {
     "name": "doolecg",
     "email": "doolecg@gmail.com"
@@ -90,6 +90,60 @@
       "description": "How I work, as skills: team work in Operant, the UI before/after flow, Minecraft test setup, desktop app baseline, general release flow and plain writing.",
       "category": "productivity",
       "source": "./plugins/core"
+    },
+    {
+      "name": "ux-design",
+      "description": "UX research and heuristics, AI UX patterns, accessibility, design analysis and extraction, and visual craft.",
+      "category": "design",
+      "source": "./plugins/ux-design"
+    },
+    {
+      "name": "project-lessons",
+      "description": "Auto-learned one-fact lessons from past sessions (Operant, EffectCraft, thumbnail-poc, OpenCode and others).",
+      "category": "development",
+      "source": "./plugins/project-lessons"
+    },
+    {
+      "name": "dev-practices",
+      "description": "General engineering workflow: planning, specs, TDD, review, debugging, git, CI/CD, security, performance and shipping.",
+      "category": "development",
+      "source": "./plugins/dev-practices"
+    },
+    {
+      "name": "ai-and-agents",
+      "description": "Hermes Agent, Ollama, MLOps, Hindsight memory, MCP, subagent patterns, computer use and reverse engineering.",
+      "category": "development",
+      "source": "./plugins/ai-and-agents"
+    },
+    {
+      "name": "media-and-docs",
+      "description": "PDF, Word, Excel and slides, OCR, comics, text-to-speech, voice transcription, asset sourcing and web research.",
+      "category": "productivity",
+      "source": "./plugins/media-and-docs"
+    },
+    {
+      "name": "seo-content",
+      "description": "SEO research, content briefs and generation, landing pages, metadata, schema, internal links, PageSpeed and company enrichment.",
+      "category": "productivity",
+      "source": "./plugins/seo-content"
+    },
+    {
+      "name": "web-and-cloud",
+      "description": "Next.js, Prisma, Neon, Supabase, Vercel, VPS deployment, cron and webhooks, GitHub workflows and web-to-native ports.",
+      "category": "development",
+      "source": "./plugins/web-and-cloud"
+    },
+    {
+      "name": "google-workspace",
+      "description": "Google Workspace (Gmail, Calendar, Drive, Sheets, Docs, Chat, Meet) CLI skills, recipes and role personas, plus mail helpers.",
+      "category": "productivity",
+      "source": "./plugins/google-workspace"
+    },
+    {
+      "name": "games",
+      "description": "Minecraft servers, Pokemon player, petdex, Core Keeper, Unity and Steam Workshop skills.",
+      "category": "development",
+      "source": "./plugins/games"
     }
   ]
 }

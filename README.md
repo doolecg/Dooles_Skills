@@ -33,6 +33,15 @@ Plugin skills are namespaced, like `/blockdesigner:blockdesigner-release`.
 | `minecraft-modding` | `fabric-modding`, `neoforge-modding`, `minecraft-26-1-migration` | [siredvin/minecraft-modding-skills](https://github.com/siredvin/minecraft-modding-skills) (MIT), pinned to a commit |
 | `minecraft-multiloader` | `minecraft-multiloader` | [jahrome907/minecraft-agent-skills](https://github.com/jahrome907/minecraft-agent-skills) (MIT), pinned to a commit |
 | `minecraft-mod-dev` | `minecraft-mod-dev` | mcpmarket (copy) |
+| `ux-design` | 30 skills, e.g. `accessibility`, `ai-chat-data-apps`, `ai-governors`, `ai-identifiers` | mine and collected |
+| `project-lessons` | 49 skills, e.g. `after-an-operant-release-delete-all`, `after-changing-effect-parameters-regener`, `after-operant-changes-run-npm-run`, `after-publishing-a-release-find-the` | mine and collected |
+| `dev-practices` | 35 skills, e.g. `api-and-interface-design`, `brainstorming`, `browser-testing-with-devtools`, `ci-cd-and-automation` | mine and collected |
+| `ai-and-agents` | 39 skills, e.g. `background-delegation-reliability`, `browser-app-automation`, `computer-use`, `debugging-hermes-tui-commands` | mine and collected |
+| `media-and-docs` | 15 skills, e.g. `baoyu-comic`, `creative-ideation`, `document-cross-referencing`, `docx` | mine and collected |
+| `seo-content` | 37 skills, e.g. `builtwith-enrichment`, `citation-sourcing`, `company-enrichment`, `content-gen-meta` | mine and collected |
+| `web-and-cloud` | 30 skills, e.g. `contributor-pr-review`, `cron-patterns`, `cron-recovery`, `cross-platform-npm-scripts` | mine and collected |
+| `google-workspace` | 100 skills, e.g. `gmail-bulk-operations`, `google-sheets-builder`, `google-sheets-operations`, `google-workspace` | mine and collected |
+| `games` | 14 skills, e.g. `build-the-jade-mod-with-a`, `check-the-core-keeper-mod-in-game`, `for-core-keeper-qol-idea-lists`, `minecraft-bedrock-server` | mine and collected |
 
 Anthropic's built-in skills (pdf, docx, xlsx, ...) and the ones synced to my claude.ai account aren't here: they already follow the account.
 
@@ -47,4 +56,4 @@ python sync.py --upstream    # also move the third-party plugins to their repos'
 claude plugin validate .
 git add -A && git commit -m "Sync skills" && git push
 ```
-To add a skill of my own, add its folder to `SOURCES` in `sync.py` (and a plugin entry in `.claude-plugin/marketplace.json` if it's a new plugin), then run the sync.
+The themed plugins (everything else in `~/.claude/skills` and `~/.agents/skills`) are listed in `themes.json`; `sync.py` copies each named skill in and prints any source skill that isn't in a plugin yet, so new ones get noticed. To add a skill of my own, add its folder to `SOURCES` in `sync.py`, or its name to a plugin in `themes.json` (and a plugin entry in `.claude-plugin/marketplace.json` if it's a new plugin), then run the sync.
