@@ -31,26 +31,8 @@ SOURCES = {
     "agent-viewer": [
         (REPOS / "Claude Agent Viewer/.claude/skills/release", "release"),
     ],
-    "operant": [
-        (REPOS / "Operant/.claude/skills/release", "release"),
-        (REPOS / "Operant/agent-plugin/skills/operant", "operant"),
-        (REPOS / "Operant/.claude/skills/learn-real-test", "learn-real-test"),
-    ],
-    "voxel-icons": [
-        (HOME / ".claude/skills/voxel-icons", "voxel-icons"),
-    ],
-    "core": [
-        (HOME / ".claude/skills/team-work", "team-work"),
-        (HOME / ".claude/skills/ui-change", "ui-change"),
-        (HOME / ".claude/skills/minecraft-test-setup", "minecraft-test-setup"),
-        (HOME / ".claude/skills/desktop-app-baseline", "desktop-app-baseline"),
-        (HOME / ".claude/skills/repo-release", "repo-release"),
-        (HOME / ".claude/skills/plain-writing", "plain-writing"),
-    ],
-    "design": [
-        (HOME / ".claude/skills/ui-critique", "ui-critique"),
-        (HOME / ".claude/skills/ui-foundations", "ui-foundations"),
-    ],
+    # voxel-icons, core (team-work, ui-change, minecraft-test-setup, desktop-app-baseline, repo-release, plain-writing)
+    # and design (ui-critique, ui-foundations) now live in this repo and are edited here: ~/.claude/skills links to them.
     "minecraft-mod-dev": [
         (HOME / ".claude/skills/Minecraft Mod Dev", "minecraft-mod-dev"),
     ],
@@ -61,6 +43,9 @@ JUNK = shutil.ignore_patterns(
 )
 # skills that come from the pinned third-party plugins in marketplace.json
 EXTERNAL = {"fabric-modding", "neoforge-modding", "minecraft-26-1-migration", "minecraft-multiloader"}
+# skills edited in this repo itself; ~/.claude/skills holds links to them, so they are never copied in
+REPO_OWNED = {"team-work", "ui-change", "minecraft-test-setup", "desktop-app-baseline", "repo-release", "plain-writing",
+              "ui-critique", "ui-foundations", "voxel-icons"}
 SKILL_ROOTS = [HOME / ".claude/skills", HOME / ".agents/skills"]  # first one wins on a duplicate name
 
 
@@ -134,7 +119,7 @@ def sync_themes(dry: bool) -> int:
             if not dry:
                 shutil.rmtree(dest, ignore_errors=True)
                 shutil.copytree(src, dest, ignore=JUNK)
-    new = sorted(set(found) - assigned - provided - EXTERNAL)
+    new = sorted(set(found) - assigned - provided - EXTERNAL - REPO_OWNED)
     if new:
         print(f"  {len(new)} skill(s) in the sources but in no plugin (add to themes.json): {', '.join(new)}")
     return changed

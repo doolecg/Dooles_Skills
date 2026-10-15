@@ -7,7 +7,7 @@ description: To stop only this project's Electron dev run, list electron.exe pro
 
 Drafted from a working procedure.
 
-1. To stop only this project's Electron dev run, list electron.exe processes whose command line contains the build\profiles\dev user-data path, then stop those PIDs. Stopping by image name would also kill the user's own Operant copy.
+1. To stop only this project's Electron dev run, list electron.exe processes whose command line contains the build\profiles\dev user-data path, then stop those PIDs. Stopping by image name would also kill the user's own installed copy of the app.
 
 ## Learned correction
 

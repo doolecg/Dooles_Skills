@@ -42,14 +42,12 @@ installNow(): spawnDetachedInstaller(file, relaunch = true); quit()
 
 ## Electron reference
 
-- Operant (JS): `F:/PROGRAMMING/REPOS/Operant/updater.js`. No electron-updater (it cannot update MSI installs); it uses `fetch` on the GitHub API.
-  - `createUpdater({send, getSettings, ...})`; `check`, `fetchAsset` (size, `sha256:` digest via `verifyDigest`, disk-space check), `installNow`/`installUnix`, `schedule`/`reschedule`/`start` (~440-459: 5 s first check, `setInterval`, `will-quit` hook), `pickAsset`, `newer`, `allowedDownloadUrl`.
-  - Wiring in `F:/PROGRAMMING/REPOS/Operant/main.js`: `createUpdater(...)` (~1579), `update:check`, `update:state`, `update:install` IPC (~1629-1639), `updater.start()` when `config.autoUpdate` (~2682), `updater.reschedule()` when `updateCheckHours` changes (~455).
-  - Tests: `test/updater.test.js` (fetch, target and downloadDir are injectable).
-- Operant2 (TypeScript): `F:/PROGRAMMING/REPOS/Operant2/main/updater.ts`. `createUpdater({send, getSettings})` returns `{status, start, check, reschedule, installNow}`; the `will-quit` install is gated by `getSettings().updates.installOnQuit`. Prefer this shape for new Electron apps.
+- Custom updater (needed for MSI, DMG or AppImage installs, which `electron-updater` cannot update): use `fetch` on the GitHub releases API. A `createUpdater({send, getSettings, ...})` module with `check`, `fetchAsset` (size, `sha256:` digest verification, disk-space check), `installNow`, `schedule`/`reschedule`/`start` (a short first check, `setInterval`, a `will-quit` hook), `pickAsset`, `newer` and an allow-list for download URLs. Make fetch, target and download dir injectable so it can be unit tested.
+  - Wire it in the main process: `update:check`, `update:state` and `update:install` IPC, `updater.start()` when the auto-update setting is on, `updater.reschedule()` when the interval setting changes.
+- Prefer a TypeScript module returning `{status, start, check, reschedule, installNow}`; gate the `will-quit` install on a `installOnQuit` setting.
 - For a simple new Electron app shipping NSIS or portable builds, `electron-updater` with `publish: github` is acceptable (free, open source): it gives check, background download and `autoInstallOnAppQuit`. You still add the UI offer, the interval (`setInterval(() => autoUpdater.checkForUpdates(), hours)`) and the settings. Use the custom GitHub-API updater for MSI, DMG or AppImage.
 - Renderer: a pill or banner driven by the pushed `update:status`; clicking sends `update:install`. Settings page has: Update automatically (toggle), Check every N hours (number), Check now (button), channel (optional).
-- Only run in packaged builds (`app.isPackaged`); keep an env override for tests (Operant: `OPERANT_UPDATE_TEST`).
+- Only run in packaged builds (`app.isPackaged`); keep an env override for tests.
 
 ## Release-side requirements
 

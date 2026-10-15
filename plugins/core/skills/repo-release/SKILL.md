@@ -1,6 +1,6 @@
 ---
 name: repo-release
-description: General release flow for any of the user's repos - bump the version, write the RELEASE_NOTES.md section, verify build and tests, commit on dev-<version>, fast-forward main, tag, publish the GitHub release with assets, and clean up. Use when the user says "release", "ship it", "publish a release", "bump the version", "tag it", "cut a release" or "release it". If the repo has its own release skill (blockdesigner-release, blockdesigner-plugin-release, operant release, agent-viewer release), use that instead; this is the general fallback and shared core.
+description: General release flow for any of the user's repos - bump the version, write the RELEASE_NOTES.md section, verify build and tests, commit on dev-<version>, fast-forward main, tag, publish the GitHub release with assets, and clean up. Use when the user says "release", "ship it", "publish a release", "bump the version", "tag it", "cut a release" or "release it". If the repo has its own release skill (blockdesigner-release, blockdesigner-plugin-release, agent-viewer release), use that instead; this is the general fallback and shared core.
 ---
 
 # Repo release
@@ -60,8 +60,7 @@ If the repo has no `RELEASE_NOTES.md`, create it with just this section.
 
 ## 4. Verify before anything is committed
 
-Run the repo's own checks and fix failures instead of releasing around them. Use `operant test "<cmd>"` and
-`operant wait <id> --errors` inside Operant, otherwise run directly.
+Run the repo's own checks and fix failures instead of releasing around them. Run them with the Bash or PowerShell tool (`run_in_background` for a long run) and read the output.
 
 - Gradle: `./gradlew test -q` (silence is a pass), then `./gradlew build` (or the repo's jar, installer or portable
   tasks). Multi-loader Minecraft mods: build every loader.
@@ -106,7 +105,7 @@ release made over a red CI has no installers and the in-app updater offers nothi
 - If CI builds installers from the tag push and uploads them to the release, then after publishing wait for that
   tag run to finish and confirm every installer is attached:
   `gh run list --limit 5` and `gh release view "$v" --json assets --jq '.assets[] | "\(.name) \(.size)"'`.
-  Compare against the platforms in the workflow matrix (for Operant: .msi, two .dmg, .AppImage and .deb).
+  Compare against the platforms in the workflow matrix (for a cross-platform Electron app: .msi, two .dmg, .AppImage and .deb).
 - When a job failed, read the failing step with `gh run view <id> --log-failed` (strip ANSI codes), fix the cause on
   a new commit, and re-run the failed jobs (`gh run rerun <id> --failed`) or, if the fix needs a new commit, ask
   before moving or re-pushing the tag (installed copies may have seen it); a patch version bump is the safe default.
@@ -148,7 +147,7 @@ Report in a few lines: release URL, what is in it, that only `main` and tags rem
 - Version regex that misses an indented line, or a bump that touches only one of several files.
 - Tag made before the build was verified: verify first, tag last.
 - Calling it released while the Build workflow is red or still running, or without all platform installers attached
-  (3.0.0 and 3.0.1 of Operant both shipped with failing CI tests; 3.0.0 had only the .msi).
+  (an Electron app once shipped two releases with failing CI tests, one with only the .msi).
 - Releasing from a dirty tree and shipping someone else's half-done work.
 - Draft or prerelease flags: the script publishes a normal latest release; say so if the user wanted otherwise.
 - Other places the user ships to (CurseForge, Modrinth, a plugin list): not automated here; mention them as a manual
@@ -156,4 +155,4 @@ Report in a few lines: release URL, what is in it, that only `main` and tags rem
 
 ## Learned correction
 
-- The repo-release publish script was run without --repo and tried the old repo name, so the release failed. Pass `--repo doolecg/Operant` explicitly until the script reads the remote's current name.
+- The repo-release publish script was run without --repo and tried the old repo name after a repo rename, so the release failed. Pass `--repo owner/name` explicitly when the repo was renamed, until the script reads the remote's current name.

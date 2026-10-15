@@ -26,7 +26,6 @@ Plugin skills are namespaced, like `/blockdesigner:blockdesigner-release`.
 |---|---|---|
 | `blockdesigner` | `blockdesigner-release`, `blockdesigner-plugin-release`, `blockdesigner-plugin-new` | mine |
 | `agent-viewer` | `release` (Claude Agent Viewer) | mine; the only copy (its checkout is gone) |
-| `operant` | `operant`, `release`, `learn-real-test` | mine |
 | `voxel-icons` | `voxel-icons` | mine |
 | `core` | `team-work`, `ui-change`, `minecraft-test-setup`, `desktop-app-baseline`, `repo-release`, `plain-writing` | mine |
 | `design` | `ui-critique`, `ui-foundations` | mine, adapted from [designer-skills](https://github.com/Owl-Listener/designer-skills) (MIT) |
@@ -34,7 +33,7 @@ Plugin skills are namespaced, like `/blockdesigner:blockdesigner-release`.
 | `minecraft-multiloader` | `minecraft-multiloader` | [jahrome907/minecraft-agent-skills](https://github.com/jahrome907/minecraft-agent-skills) (MIT), pinned to a commit |
 | `minecraft-mod-dev` | `minecraft-mod-dev` | mcpmarket (copy) |
 | `ux-design` | 30 skills, e.g. `accessibility`, `ai-chat-data-apps`, `ai-governors`, `ai-identifiers` | mine and collected |
-| `project-lessons` | 49 skills, e.g. `after-an-operant-release-delete-all`, `after-changing-effect-parameters-regener`, `after-operant-changes-run-npm-run`, `after-publishing-a-release-find-the` | mine and collected |
+| `project-lessons` | 35 skills, e.g. `after-changing-effect-parameters-regener`, `after-publishing-a-release-find-the`, `to-build-the-github-release-body` | mine and collected |
 | `dev-practices` | 35 skills, e.g. `api-and-interface-design`, `brainstorming`, `browser-testing-with-devtools`, `ci-cd-and-automation` | mine and collected |
 | `ai-and-agents` | 39 skills, e.g. `background-delegation-reliability`, `browser-app-automation`, `computer-use`, `debugging-hermes-tui-commands` | mine and collected |
 | `media-and-docs` | 15 skills, e.g. `baoyu-comic`, `creative-ideation`, `document-cross-referencing`, `docx` | mine and collected |
@@ -46,6 +45,11 @@ Plugin skills are namespaced, like `/blockdesigner:blockdesigner-release`.
 Anthropic's built-in skills (pdf, docx, xlsx, ...) and the ones synced to my claude.ai account aren't here: they already follow the account.
 
 The BlockDesigner skills call their scripts by their path in the BlockDesigner checkout (`F:/PROGRAMMING/REPOS/BlockDesigner/.claude/skills/...`), so they're meant for a PC with that checkout.
+
+## Rules and OpenCode agents
+- `rules/rules.md` is my global rules file, shared by both tools. Claude Code imports it from `~/.claude/CLAUDE.md` (`@~/.claude/dooles-rules/rules.md`, where `dooles-rules` is a directory junction to `rules/`); OpenCode loads it through `instructions` in `~/.config/opencode/opencode.jsonc`.
+- `opencode/agent/` holds the OpenCode worker agents `worker-small` (Haiku), `worker-medium` (Sonnet) and `worker-hard` (Opus). `~/.config/opencode/agent` is a directory junction to it.
+- `~/.claude/skills/<name>` for the skills in `core`, `design` and `voxel-icons` are junctions to the folders in `plugins/`, so they are edited here and `sync.py` does not copy them.
 
 ## Keeping it up to date
 My own skills are edited where they're used, next to their projects (often git-ignored there, so this repo is also their backup). To bring the changes here:

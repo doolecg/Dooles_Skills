@@ -32,7 +32,7 @@ keep it in place. Scripts are in `scripts/` next to this file (`<skill>` = this 
 8. **Focus guard:** start `scripts/background.ps1` as a background process before the game (see Focus below).
 9. **Launch** (record the PID), then check the log: `Loading N mods` with the expected N, no mod-load errors.
    Fabric/NeoForge: `./gradlew :<module>:runClient` / `runServer`. Paper: `./gradlew :paper:runServer`.
-   In Operant use `operant run "<cmd>"` then `operant wait <id> --errors`; set `OPERANT_BACKGROUND=1`.
+   Run it with the Bash or PowerShell tool in the background (`run_in_background`), then read the log for errors.
 10. **Clean up:** stop only the PIDs you started; remove temp files you made. Do not touch another run folder.
 
 Never modify a run folder the user did not ask about; test scripts on a scratchpad copy first.
@@ -79,7 +79,7 @@ If Iris has no build for the version, shots use Bare Bones without shaders; say 
   watchdog, not a crash. Check the game log.
 - `mv x mods` into an existing `mods/` nests it; use `cp file mods/`. Confirm `Loading N mods` in the log.
 - 26.3 servers default the whitelist on; seed it off.
-- Operant tiles run PowerShell: set env inline, `$env:VAR='1'; ./gradlew ...`.
+- In the PowerShell tool set env inline, `$env:VAR='1'; ./gradlew ...`; in the Bash tool `VAR=1 ./gradlew ...` works.
 - Stop processes by PID, never by name (`java` belongs to other things too).
 - Reading 26.x APIs: `javap` from `~/.jdks/temurin-26.0.2.1/bin` on the Loom merged jar, NeoForge sources jar in the
   Gradle cache (`references/reading-apis.md`).

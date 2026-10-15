@@ -36,16 +36,16 @@ BlockDesigner (multi-module, `:app:run`) has no `.run` folder yet. When adding: 
 
 ## Electron / npm
 
-Operant and Operant2 have no `.run` configs today. Use npm scripts and IntelliJ npm run configs:
+Electron apps use npm scripts and IntelliJ npm run configs:
 
 - `package.json`: `"run:dev": "electron ."` (Vite apps: their dev script) and `"run:main": "node scripts/run-main.mjs"`.
 - `scripts/run-main.mjs` (template `templates/run-main.mjs`): deletes `build/main-run`, runs `git archive main` into it, `npm ci`, the build script if there is one, then `npm start`, forwarding the exit code.
 - Run configs: `templates/npm-Main Run.run.xml` and `templates/npm-Dev Run.run.xml` (IntelliJ type `js.build_tools.npm`, one script each). Save as `.run/Main Run.run.xml` and `.run/Dev Run.run.xml`.
-- Add `build/` to `.gitignore`. Keep `build/main-run` out of the electron-builder `files`. If `build/` also holds icons (Operant does), that is fine, just ignore only `build/main-run`.
+- Add `build/` to `.gitignore`. Keep `build/main-run` out of the electron-builder `files`. If `build/` also holds icons, that is fine, just ignore only `build/main-run`.
 - `npm ci` in `main-run` reinstalls every time; for speed, junction the parent `node_modules` instead, if native modules allow it. Note it in the script.
 
 ## No focus steal
 
-- Electron: read an env flag (this user's apps use `OPERANT_BACKGROUND=1`). Create the window with `show: false`; on `ready-to-show` call `win.showInactive()` when the flag is set, `win.show()` otherwise. Skip every later `focus()` or `moveTop()` while it is set. Reference: `F:/PROGRAMMING/REPOS/Operant/main.js` ~499-502, ~1515-1518, ~2616, ~2638; `F:/PROGRAMMING/REPOS/Operant2/main/index.ts` 17-18 and 54. Set the flag when an agent does a test run; do not force it on the user's own manual runs.
+- Electron: read an env flag of your choosing (for example `<APP>_BACKGROUND=1`). Create the window with `show: false`; on `ready-to-show` call `win.showInactive()` when the flag is set, `win.show()` otherwise. Skip every later `focus()` or `moveTop()` while it is set. Set the flag when an agent does a test run; do not force it on the user's own manual runs.
 - JavaFX: there is no built-in "show inactive". Add a `-D<app>.background=true` property: `stage.show()` then `stage.toBack()`, and skip `requestFocus()`. Check on Windows that it does not steal focus; if it still does, tell the user.
 - Other toolkits: use the no-activate show flag (Win32 `SW_SHOWNOACTIVATE`).

@@ -24,14 +24,13 @@ Visual quality questions ("does this look right", "polish it") go to `ui-critiqu
 
 Test runs open behind the user's active windows. Never `SetForegroundWindow`, Alt+Tab, click or type into the app window.
 Stop only processes you started, by PID, never by name (`Stop-Process -Id`). Do not close the user's own app instances
-(their real Operant, BlockDesigner, Minecraft): launch a separate test copy.
+(their real BlockDesigner, Minecraft): launch a separate test copy.
 
 ## Capture per app type
 
 | App | Before/after capture |
 |---|---|
 | Any Windows window | `scripts/capture-window.ps1`: PrintWindow with PW_RENDERFULLCONTENT, DPI aware, no focus. `-List` shows windows; `-ProcessId <pid>` or `-Title <substring>`; `-Out x.png`. Works for JavaFX and Electron windows, including ones behind others. Not minimised windows (they render blank). |
-| Operant (`F:/PROGRAMMING/REPOS/Operant`) | Launch the test copy with env `OPERANT_BACKGROUND=1` (in `main.js` this creates the window hidden and calls `showInactive()`; `test/smoke.mjs` also sets `OPERANT_USER_DATA=<temp profile>` so the test copy does not touch the user's data). Capture with `capture-window.ps1 -ProcessId <the pid you started>`. The `operant shot` CLI exists too (downscaled JPEG, `--selector`, `--region`, `--full`) but captures the running Operant instance; check `operant shot --help` before using it on a test copy. |
 | Other Electron | Create the window with `show:false` then `showInactive()`. In-app: `win.webContents.capturePage()` then `image.toPNG()` to a file, behind an env flag (for example `APP_SHOT=<path>`) that screenshots and quits. Otherwise `capture-window.ps1`. |
 | JavaFX (BlockDesigner etc.) | Best: in-app `node.snapshot(null, null)` (or `scene.snapshot`) on the FX thread, `SwingFXUtils.fromFXImage` then `ImageIO.write(..., "png", file)`. BlockDesigner already has this as env-gated JUnit ITs (see below). For the live window use `capture-window.ps1`. |
 | Minecraft mod screen/HUD | Use the `minecraft-test-setup` skill: env-gated in-mod driver that opens the screen/steps the camera, waits ~60 ticks, calls `Screenshot.grab`, then `mc.stop()`. No F2, no clicking. If the window pops to the front, run `scripts/background.ps1` before launching. |
@@ -68,7 +67,7 @@ with the main model.
 - Capture after the UI has settled (animations, async loads, 60 Minecraft ticks), not at the first frame.
 - Windows with GPU content (JavaFX 3D, Minecraft) may come out black via PrintWindow: use the in-app grab instead.
 - Minimised or off-screen windows capture blank; restore without focus (`ShowWindow SW_SHOWNOACTIVATE`) or use in-app capture.
-- Env vars must reach the app: `operant run` tiles are PowerShell, so use `$env:NAME='1'; cmd`, not `NAME=1 cmd`.
+- Env vars must reach the app: in the PowerShell tool use `$env:NAME='1'; cmd`, not `NAME=1 cmd` (that form is for Bash).
 - A launched game can still grab focus at startup; if stray input might have opened a screen, check the shot and rerun.
 - Do not call it fixed from the code diff: the after shot is the evidence.
 - Respect the app's existing look (theme tokens, CSS) rather than inventing new styling.
@@ -80,7 +79,3 @@ with the main model.
 ## Learned correction
 
 - The ui-change skill expects before and after screenshots. For Core Keeper, the game cannot be captured without taking focus or holding ALT in a world, so the before and after shots were not possible. State that the visual result is unverified and do not claim it was checked.
-
-## Learned correction
-
-- For UI before and after screenshots, use the Operant internal browser (the operant-browser MCP tools such as browser_navigate, browser_resize and browser_take_screenshot), not Playwright MCP or capture-window.ps1. Put this rule in the brief of any subagent that takes screenshots, because a Haiku screenshot agent started on the wrong tools and had to be redirected mid-run.

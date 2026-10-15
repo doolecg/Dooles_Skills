@@ -25,7 +25,6 @@ The user is often working in other windows or away on a phone. Never raise, focu
 
 | App type | How to capture |
 |---|---|
-| Operant | Start with `OPERANT_BACKGROUND=1`; use its own screenshot function or the project's capture script. |
 | Electron | Window opens with `showInactive()`; capture with `webContents.capturePage()` or Playwright `page.screenshot()`. |
 | JavaFX | `Node.snapshot(null, null)` on the scene root, written with `ImageIO`; or Win32 `PrintWindow` on the window handle. |
 | Minecraft mod | Dev client with a dev-only screenshot mode; see the Minecraft mod bullets below. |

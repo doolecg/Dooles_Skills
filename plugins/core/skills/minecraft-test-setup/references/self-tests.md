@@ -11,7 +11,7 @@ test never sees chunks load. Drive from the mod's server tick event.
 Headless server run:
 1. `python scripts/seed_config.py eula <run dir>` and `... server <run dir>` (whitelist off, peaceful, creative).
 2. `MODID_SELFTEST=1 MODID_SELFTEST_QUIT=1 ./gradlew :fabric:runServer` (or `:neoforge:runServer`, `:paper:runServer`).
-   Inside Operant use `operant test "<cmd>"` and `operant wait <id> --errors`.
+   Run it with the Bash or PowerShell tool (`run_in_background` for a long run) and read the output for errors.
 3. Read the result file and `run/logs/latest.log`. Persistence tests use two modes (write and stop, then read after
    restart), recording state in a file between runs.
 

@@ -15,9 +15,9 @@ Every desktop app Dayle builds ships with the items below. Two modes:
 1. **Auto-update from GitHub releases.** Check the repo's latest release at startup and every few hours (default 3, user-settable, 0 = startup only). Download the installer in the background. Offer it in the UI: install on click, or on quit. See [references/auto-update.md](references/auto-update.md).
 2. **In-app settings page.** Every option the app has is on it, applied live and saved. Keybinds are rebindable in the app (capture widget), not only in a config file. Reset per section. See [references/settings-page.md](references/settings-page.md).
 3. **Exactly two IntelliJ run configurations**, committed in `.run/*.run.xml`: `Main Run` (builds and runs the code committed on `main`, exported to `build/main-run`, working tree untouched) and `Dev Run` (builds and runs the working tree). No sandbox, lab or other configs. See [references/run-configs.md](references/run-configs.md).
-4. **Test runs never take focus.** Windows open behind the active window (Electron: `OPERANT_BACKGROUND=1` and `showInactive()`). See [references/run-configs.md](references/run-configs.md).
+4. **Test runs never take focus.** Windows open behind the active window (Electron: `showInactive()`, behind an env flag you set for test runs). See [references/run-configs.md](references/run-configs.md).
 5. **Free and open source only.** No paid services, closed-source libraries or proprietary APIs. No dependency added without asking.
-6. **Repo files.** MIT `LICENSE` (`Copyright (c) <year> doole`, as in BlockDesigner), `README.md`, and `RELEASE_NOTES.md`, newest release first: `# <App> <version>`, then New / Changed / Fixed, sections separated by `---`. That top section is the GitHub release body. Templates are in `templates/`. Existing apps keep their own open-source licence (Operant is Apache-2.0, which is fine); only closed or missing licences are a gap.
+6. **Repo files.** MIT `LICENSE` (`Copyright (c) <year> doole`, as in BlockDesigner), `README.md`, and `RELEASE_NOTES.md`, newest release first: `# <App> <version>`, then New / Changed / Fixed, sections separated by `---`. That top section is the GitHub release body. Templates are in `templates/`. Existing apps keep their own open-source licence; only closed or missing licences are a gap.
 7. **Release flow** follows the global rules in CLAUDE.md: commit, push, tag and publish only when asked; no AI attribution in commits; plain tags (`1.2.1`); work on `dev-<version>`, fast-forward `main`, delete the dev branch. The release must attach the asset the updater looks for (see Asset naming). If the repo has a release skill, use it.
 
 ## Create mode: order of work
@@ -45,7 +45,7 @@ For each line, find the evidence (file and symbol) or flag it missing.
 | Keybinds rebindable in the UI | capture button, `Keybinds.fromEvent` | recording chip, keydown handler |
 | Two run configs only | `ls .run` shows `Dev Run` and `Main Run` | same, npm type |
 | Main Run uses `git archive main` into `build/main-run` | Gradle `exportMain`/`runMain` | `scripts/run-main.mjs` |
-| No focus steal in test runs | flag respected | `OPERANT_BACKGROUND`, `showInactive()` |
+| No focus steal in test runs | flag respected | env flag, `showInactive()` |
 | Open-source LICENSE (MIT for new apps), README, RELEASE_NOTES.md | files exist, format matches | same |
 | Free and open source | no paid or closed dependency | same |
 
@@ -54,17 +54,16 @@ For each line, find the evidence (file and symbol) or flag it missing.
 The updater picks the asset by file name, so the release must match.
 
 - BlockDesigner: `F:/PROGRAMMING/REPOS/BlockDesigner/app/src/main/java/io/blockdesigner/app/update/Updater.java`, `parseRelease` (~line 150). `*-portable.zip` for portable copies, `*.msi` for installed copies, `.exe` only as a legacy fallback. Names: `BlockDesigner-<v>.msi`, `BlockDesigner-<v>-portable.zip`.
-- Operant: `F:/PROGRAMMING/REPOS/Operant/updater.js`, `pickAsset`. Windows takes the first `.msi` (`Operant-<v>-windows-x64.msi`); macOS a `.dmg` containing `-mac-<arch>` (`Operant-<v>-mac-arm64.dmg`); Linux an `.AppImage` containing `x86_64`/`arm64`, or a `.deb` containing `amd64`/`arm64`. Set `artifactName` in the electron-builder config to match.
 - The tag is the version (`1.2.1`); updaters strip a leading `v` anyway. Versions are numeric `major.minor.patch`.
-- GitHub shows `digest: "sha256:<hex>"` on each uploaded asset. Operant refuses to auto-install an asset without one, so upload through the REST API.
+- Electron apps: match `artifactName` in the electron-builder config to whatever the app's asset picker looks for per platform (Windows `.msi`, macOS `.dmg` containing the arch, Linux `.AppImage` or `.deb` containing the arch).
+- GitHub shows `digest: "sha256:<hex>"` on each uploaded asset. An updater should refuse to auto-install an asset without one, so upload through the REST API.
 
 ## Reference implementations (read before writing new code)
 
 | Stack | Repo | What to copy |
 |---|---|---|
 | JavaFX | `F:/PROGRAMMING/REPOS/BlockDesigner` | `app/.../update/Updater.java`, `ui/UpdateDialog.java`, `Settings.java`, `ui/SettingsDialog.java`, `ui/Keybinds.java` |
-| Electron (JS) | `F:/PROGRAMMING/REPOS/Operant` | `updater.js`, `main.js` (updater wiring ~1579-1640, `OPERANT_BACKGROUND`), `renderer/settings.js` |
-| Electron (TS, Vite) | `F:/PROGRAMMING/REPOS/Operant2` | `main/updater.ts`, `main/index.ts`, `renderer/src/components/settings/sections/` |
+| Electron | none of the user's apps yet | build it from [references/auto-update.md](references/auto-update.md) and [references/settings-page.md](references/settings-page.md) |
 | Run configs (Gradle) | `HyQol`, `Exposed`, `Techtale`, `Bloc_game` under `F:/PROGRAMMING/REPOS` | `.run/*.run.xml`, `runDev`/`exportMain`/`runMain` tasks |
 
 The Claude Agent Viewer repo was not under `F:/PROGRAMMING/REPOS` when this skill was written (only its app-data folder exists). If it lives elsewhere, read it and add it here.
@@ -72,5 +71,3 @@ The Claude Agent Viewer repo was not under `F:/PROGRAMMING/REPOS` when this skil
 ## Known gaps in the user's own apps (flag when working in them)
 
 - BlockDesigner: periodic re-check (4 h), install on quit and Main/Dev Run added 2026-10-03 (uncommitted at the time). No no-focus launch flag for test runs.
-- Operant: Main/Dev Run added 2026-10-03 (`scripts/run-dev.mjs`, `run-main.mjs`, own profiles under `build/profiles`).
-- Operant2: no `.run` configs.

@@ -17,9 +17,9 @@
   `server.getCommands().performPrefixedCommand` on the server); difficulty in level.dat is under
   `difficulty_settings`; datapack `pack.mcmeta` uses `min_format`/`max_format`; the function folder is `function`
   (singular) since 1.21, `functions` before.
-- **Operant tiles run PowerShell:** pass env inline, `$env:MODID_CLIENT_SHOTS='1'; ./gradlew ...`. A bash-style
-  `VAR=1 cmd` prefix fails there, and env set outside the tile does not reach the game. In Git Bash, `VAR=1 ./gradlew`
-  works. Run Operant itself with `OPERANT_BACKGROUND=1`.
+- **The PowerShell tool needs env set inline:** `$env:MODID_CLIENT_SHOTS='1'; ./gradlew ...`. A bash-style
+  `VAR=1 cmd` prefix fails there, and env set outside the command does not reach the game. In Git Bash, `VAR=1 ./gradlew`
+  works.
 - **Stop only what you started, by PID.** Capture the PID when launching (`$!` in bash, `Start-Process -PassThru`).
   Never `taskkill /im java.exe` or `Stop-Process -Name java`.
 - **Iris/Sodium need a build for that exact MC version.** If none exists (new snapshot), shots fall back to plain

@@ -3,18 +3,18 @@
 ## Requirements
 
 1. **Every option the app has is on the page.** No option exists only in a config file. A feature that adds an option adds it to the page in the same change.
-2. **Applied live.** A control takes effect immediately. If one truly needs a restart, mark it (Operant: `RESTART_KEYS` in `renderer/settings.js`, with a hint) and offer a restart button. Keep those rare.
-3. **Saved.** One JSON file in the user data folder (JavaFX: `%APPDATA%/<App>/settings.json`, overridable with a `-D<app>.dataDir` property for portable builds; Electron: `app.getPath('userData')`). Write atomically (temp file, then rename; Operant: `atomic-write.js`). Ignore unknown fields on load, fill missing ones with defaults, migrate explicitly.
+2. **Applied live.** A control takes effect immediately. If one truly needs a restart, mark it (a `RESTART_KEYS` set, with a hint) and offer a restart button. Keep those rare.
+3. **Saved.** One JSON file in the user data folder (JavaFX: `%APPDATA%/<App>/settings.json`, overridable with a `-D<app>.dataDir` property for portable builds; Electron: `app.getPath('userData')`). Write atomically (temp file, then rename). Ignore unknown fields on load, fill missing ones with defaults, migrate explicitly.
 4. **Defaults in one place**, so reset has something to reset to.
 5. **Reset per section** ("Reset to defaults" in each section header), plus reset-all for keybinds.
-6. **Search box** once there are more than about 20 options (Operant and BlockDesigner both have one).
+6. **Search box** once there are more than about 20 options (BlockDesigner has one).
 7. **Updates section:** Update automatically, Check every N hours, Check now, current version, link to release notes.
 8. **Keybinds section:** see below.
 9. Opens from a keybind (BlockDesigner: `Shortcut+Comma`) and from a menu or button.
 
 ## Keybinds
 
-- A registry of actions: id, group, label, default combination(s). Up to two combinations per action (BlockDesigner) or a list (Operant).
+- A registry of actions: id, group, label, default combination(s). Up to two combinations per action (BlockDesigner) or a list.
 - Store only the user's changes as strings (BlockDesigner `Settings.keybinds`, e.g. `"Ctrl+Shift+J|Z"`), so defaults can change in later versions.
 - UI: one row per action, grouped. A button per slot shows the key. Click it: it reads "Press a key...", capture the next combination, consume the event, save, refresh. Esc cancels; losing focus cancels. A clear (X) button per slot. A reset button per row, disabled when already default. Warn on conflicts (BlockDesigner: `Keybinds.usersOf(combo, except)`).
 - Capture must swallow the key (so Alt, F10 or Esc do not trigger the app) and ignore a lone modifier press, unless the action is a held key.
@@ -33,7 +33,7 @@
 
 ## Electron reference
 
-- Operant (JS): `F:/PROGRAMMING/REPOS/Operant/renderer/settings.js`. A `SECTIONS` array of `{key, label, hint, type}` rows (`toggle`, `number`, ...) drives the page and its search (`settingsIndex`); `RESTART_KEYS`. Keybinds: `GROUPS` (~936) maps action ids to labels; `renderKeys(body, keybinds, recording, {onAdd, onRemove})` renders chips with a `+` chip that turns into "press keys... (Esc cancels)" while recording, and a remove button per chip. The main process holds `config` in `main.js` and reacts to patches (~455 for `updateCheckHours`). Contract test: `test/settings-contract.test.js`.
-- Operant2 (TS/React): `F:/PROGRAMMING/REPOS/Operant2/shared/settings.ts` (types and defaults, including `updates.installOnQuit`), `renderer/src/components/settings/sections/GeneralSection.tsx` and `ShortcutsSection.tsx`, `renderer/src/registry.ts`.
+- Pattern for a JS app: a `SECTIONS` array of `{key, label, hint, type}` rows (`toggle`, `number`, ...) drives the page and its search; a `RESTART_KEYS` set marks options that need a restart. Keybinds: a `GROUPS` map from action ids to labels; render chips with a `+` chip that turns into "press keys... (Esc cancels)" while recording, and a remove button per chip. The main process holds the config and reacts to patches (for example rescheduling the updater when the interval changes).
+- For TS/React: keep the settings types and defaults in a shared module (including `updates.installOnQuit`), one component per settings section, and a shortcuts section driven by an action registry.
 - Pattern: settings live in the main process. The renderer sends a patch over IPC; main validates, saves, applies side effects (reschedule the updater, theme), then broadcasts the new settings to every window.
-- Add a test that fails when an option exists in the defaults but not on the page (Operant's `settings-contract.test.js`).
+- Add a test that fails when an option exists in the defaults but not on the page.

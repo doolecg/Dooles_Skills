@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "dooles-skills",
-  "description": "doolecg's Claude Code skills: BlockDesigner, Claude Agent Viewer and Operant releases, voxel icons, Minecraft modding, UI design and how I work, plus a backup of the rest of my skills grouped by theme (Google Workspace, SEO, UX, dev practices, web and cloud, AI and agents, media, games, lessons).",
+  "description": "doolecg's Claude Code skills: BlockDesigner and Claude Agent Viewer releases, voxel icons, Minecraft modding, UI design and how I work, plus a backup of the rest of my skills grouped by theme (Google Workspace, SEO, UX, dev practices, web and cloud, AI and agents, media, games, lessons).",
   "owner": {
     "name": "doolecg",
     "email": "doolecg@gmail.com"
@@ -18,12 +18,6 @@
       "description": "Release Claude Agent Viewer: version bump, RELEASE_NOTES.md, launch check, dev branch, tag, MSI build and release check.",
       "category": "development",
       "source": "./plugins/agent-viewer"
-    },
-    {
-      "name": "operant",
-      "description": "Operant control (tiles, workers, task board, memory) and releasing Operant: version bump, RELEASE_NOTES.md, launch check, dev branch, tag, MSI build and release check.",
-      "category": "development",
-      "source": "./plugins/operant"
     },
     {
       "name": "voxel-icons",
@@ -87,7 +81,7 @@
     },
     {
       "name": "core",
-      "description": "How I work, as skills: team work in Operant, the UI before/after flow, Minecraft test setup, desktop app baseline, general release flow and plain writing.",
+      "description": "How I work, as skills: team work with subagents, the UI before/after flow, Minecraft test setup, desktop app baseline, general release flow and plain writing.",
       "category": "productivity",
       "source": "./plugins/core"
     },
@@ -99,7 +93,7 @@
     },
     {
       "name": "project-lessons",
-      "description": "Auto-learned one-fact lessons from past sessions (Operant, EffectCraft, thumbnail-poc, OpenCode and others).",
+      "description": "Auto-learned one-fact lessons from past sessions (EffectCraft, thumbnail-poc, OpenCode and others).",
       "category": "development",
       "source": "./plugins/project-lessons"
     },
