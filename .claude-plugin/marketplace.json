@@ -102,6 +102,20 @@
       "skills": [
         "./minecraft-multiloader"
       ]
+    },
+    {
+      "name": "godot-prompter",
+      "description": "Godot 4.x skills, agents and hooks for GDScript and C#: architecture, UI, state machines, save/load, testing, profiling (from jame581/GodotPrompter, pinned).",
+      "category": "development",
+      "author": {
+        "name": "Jan Mesarc"
+      },
+      "homepage": "https://github.com/jame581/GodotPrompter",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/jame581/GodotPrompter.git",
+        "sha": "bd9d18008fb1fd5919fdc297267048670b6eac1f"
+      }
     }
   ]
 }

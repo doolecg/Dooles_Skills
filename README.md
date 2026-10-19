@@ -72,8 +72,9 @@ Plugin skills are namespaced, for example `/core:team-work`.
 | `project-lessons` | 18 | One-fact lessons from past sessions |
 | `minecraft-modding` | 3 | [siredvin/minecraft-modding-skills](https://github.com/siredvin/minecraft-modding-skills) (MIT), pinned |
 | `minecraft-multiloader` | 1 | [jahrome907/minecraft-agent-skills](https://github.com/jahrome907/minecraft-agent-skills) (MIT), pinned |
+| `godot-prompter` | 56 | [jame581/GodotPrompter](https://github.com/jame581/GodotPrompter), Godot 4.x skills and agents, pinned |
 
-Not covered yet: Java (beyond Minecraft), Blender and Godot. Godot and Unity come from the `awesome-gamedev-agent-skills` plugins, which Auto Plugins switches on per project.
+Not covered yet: Java (beyond Minecraft) and Blender. Unity and more Godot skills come from the `awesome-gamedev-agent-skills` plugins, which Auto Plugins switches on per project.
 
 Third-party plugins are not copied here. `marketplace.json` points at their original repos, pinned to a commit.
 
