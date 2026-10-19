@@ -55,6 +55,8 @@ For any BlockDesigner-related project (the BlockDesigner app, its plugins `Block
 
 ## MCP tools first
 - When an MCP server offers a tool for the job (git, browser, Coolify, Gmail, Drive, Calendar, CodeGraph, Hindsight), use it before shell commands or built-in tools. Fall back to shell only when no MCP tool fits.
+- **Coolify changes go through its API, not the browser:** use the Coolify MCP where it has the tool, otherwise the REST API at `http://192.168.0.41:8000/api/v1` with the `COOLIFY_TOKEN` user environment variable (read it from the Windows user environment if this session started before it was set; never print it). Playwright (Firefox) is the backup only, for things the API cannot do, such as a service's own first-run wizard.
+- **Blender: always use the Frugal Blender MCP** (`mcp__blender__discover`, `inspect`, `execute`, `capture`; Python through its `python` operation) for every Blender job: building, editing, inspecting, rendering, saving. The normal Blender MCP (`blender-mcp`) is removed; if Frugal can't do something, tell me instead of working around it. Never run `blender.exe` headless instead. If the bridge is not running (tools fail with "Start the Blender bridge" or a transport error), tell me to open View3D > Sidebar > Frugal MCP, tick Allow python and save, and click Start bridge, then wait; do not work around it. This applies to every project and every subagent: put it in each Blender agent's brief.
 
 ## Subagents: smallest model that fits
 **By default, for any job:**
@@ -63,10 +65,12 @@ For any BlockDesigner-related project (the BlockDesigner app, its plugins `Block
 - Don't give two agents the same file at once.
 - Once the design is settled, hand the implementation and the testing to agents rather than writing it all yourself.
 
-In Claude Code, subagents are the Agent tool and its `model` param; they default to Haiku (`CLAUDE_CODE_SUBAGENT_MODEL=haiku` in `~/.claude/settings.json`). In OpenCode, subagents are agents: `worker-small` (Haiku), `worker-medium` (Sonnet) and `worker-hard` (Opus), defined in `F:\PROGRAMMING\REPOS\Dooles_Skills\opencode\agent` and linked into `~/.config/opencode/agent`. Size each one to its task:
-- **Small tasks** (look something up, read or summarise files, rename, run builds/tests, simple edits, screenshots, docs tweaks): leave the default, Haiku (OpenCode: `worker-small`).
-- **Medium tasks** (a feature across a few files, a normal bug fix, a UI change): pass `model: "sonnet"` (OpenCode: `worker-medium`). Say so in one line when spawning; no need to ask.
-- **Hard tasks** (architecture, a big refactor or migration, tricky debugging, security-sensitive work): ask me first, or if I've already asked for it, pass `model: "opus"` (OpenCode: `worker-hard`), but only for the hard part. Split the work so the follow-up (tests, docs, cleanup, screenshots) goes to a smaller model once the hard part is done.
+In Claude Code, subagents are the Agent tool and its `model` param; they default to Sonnet 5.5 (`CLAUDE_CODE_SUBAGENT_MODEL=sonnet` in `~/.claude/settings.json`). In OpenCode, subagents are agents: `worker-small` (Haiku), `worker-medium` (Sonnet) and `worker-hard` (Opus), defined in `F:\PROGRAMMING\REPOS\Dooles_Skills\opencode\agent` and linked into `~/.config/opencode/agent`. Size each one to its task:
+- **Very small tasks** (commit and push, look something up, research or list folders, read or summarise files, run a build or tests, renames, screenshots): pass `model: "haiku"`, Haiku 5.5 (OpenCode: `worker-small`).
+- **Small tasks** (simple edits, docs tweaks, a small fix in one file, tests for existing code): leave the default, Sonnet 5.5 (OpenCode: `worker-medium`).
+- **Hard tasks and UI design** (UI screens, visual design, layouts and components built to mockups; simulation rules; architecture; a feature across several files; tricky debugging): pass `model: "opus"` (OpenCode: `worker-hard`). Say so in one line when spawning; no need to ask.
+- **Everything else on the side** (tests for existing code, docs, release notes, a normal bug fix, doc edits): leave the default, Sonnet 5.5.
+- **Very hard tasks** (a big refactor or migration, security-sensitive work): ask me first, or if I've already asked for it, use Opus or keep it on the main model, but only for the hard part. Split the work so the follow-up (tests, docs, cleanup, screenshots) goes to a smaller model once the hard part is done.
 - Forks always run on the main model, so prefer a fresh agent with a small model over a fork for small tasks.
 
 ## How to work with me
@@ -95,3 +99,10 @@ In Claude Code, subagents are the Agent tool and its `model` param; they default
 - Don't add dependencies, services or third-party plugins/skills without asking.
 - Keep everything free and open source: no paid services, closed-source libraries or proprietary APIs, in any project.
 - Don't leave debug output, temporary files or stray branches/worktrees behind; clean up what you made.
+
+## Skills and process: my own skills plus superpowers
+Applies in every project, in the terminal and in the Claude desktop app (Code tab).
+- Use my own self-optimising skills and current skills, plus superpowers for process and subagents (subagent-driven-development, dispatching-parallel-agents, writing-plans, systematic-debugging, verification-before-completion).
+- Per-project skills may be deleted; don't look for or rely on them (the Operant skills are gone).
+- Always search Hindsight and CodeGraph first, before grep or Read, in every task and every subagent brief.
+- Never use superpowers:brainstorming.

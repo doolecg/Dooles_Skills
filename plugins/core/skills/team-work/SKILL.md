@@ -18,10 +18,10 @@ Before spawning anything, decide yourself:
 If the design is genuinely hard or unclear, ask the user (or take the design yourself on the main model); do not let workers invent the contracts.
 
 ## 2. Size each task to a tier
-Say the tier in one line when spawning ("Spawning 3 workers: 2 sonnet, 1 haiku"). No need to ask for haiku or sonnet.
-- haiku (OpenCode: `worker-small`): look-ups, reading and summarising files, docs tweaks, renames, running builds and tests, screenshots.
-- sonnet (`worker-medium`): a feature across a few files, a normal bug fix, a UI change, asset generation.
-- opus (`worker-hard`): only with the user's OK, and only for the hard part (architecture, big migration, tricky debugging, security work). Split it out so the follow-up (tests, docs, screenshots) goes to a smaller tier.
+Say the tier in one line when spawning ("Spawning 3 workers: 2 opus, 1 haiku"). No need to ask for haiku, sonnet, or opus on medium work.
+- haiku, Haiku 5.5 (OpenCode: `worker-small`): very small jobs: commit and push, look-ups, researching folders, reading and summarising files, running builds and tests, renames, screenshots.
+- sonnet, Sonnet 5.5, the default (`worker-medium`): small jobs: simple edits, docs tweaks, a small fix in one file, tests for existing code.
+- opus (`worker-hard`): medium jobs by default (a feature across a few files, a normal bug fix, a UI change, asset generation), and the hard part (architecture, big migration, tricky debugging, security work) only with the user's OK. Split it out so the follow-up (tests, docs, screenshots) goes to a smaller tier.
 - Judgement calls, design decisions and anything touching the user's intent stay with you.
 Cheapest tier that fits. In Claude Code, use the Agent tool with `model` set (`run_in_background` for work you do not need to wait on). Forks run on the main model, so prefer a fresh small-model agent.
 Independent tasks go in one message, in parallel (6 parallel workers on separate folders has worked well).

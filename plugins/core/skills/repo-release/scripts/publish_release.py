@@ -67,11 +67,12 @@ def call(method, url, tok, body=None, data=None, ctype="application/json", missi
 
 
 def notes_section(path, version, app):
-    """Top section of the notes file (up to the first line that is only ---), heading included."""
+    """Top section of the notes file (up to the --- before the next version heading), heading included."""
     if not os.path.isfile(path):
         sys.exit(f"{path} not found.")
     text = open(path, encoding="utf-8").read().replace("\r\n", "\n")
-    section = text.split("\n---\n", 1)[0].strip()
+    # New, Changed and Fixed inside one release are also split by --- lines: only a --- before the next heading ends it.
+    section = re.split(r"\n---\n+(?=# )", text, maxsplit=1)[0].strip()
     first = section.splitlines()[0].strip() if section else ""
     m = re.fullmatch(r"# (.+) " + re.escape(version), first)
     if not m or (app and m.group(1) != app):
