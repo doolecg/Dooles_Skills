@@ -3,5 +3,6 @@
   "description": "Auto-learned one-fact lessons from past sessions (EffectCraft, thumbnail-poc, OpenCode and others).",
   "author": {
     "name": "doolecg"
-  }
+  },
+  "version": "1.0.0"
 }

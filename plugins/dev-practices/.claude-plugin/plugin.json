@@ -1,6 +1,7 @@
 {
   "name": "dev-practices",
-  "description": "General engineering workflow: planning, specs, TDD, review, debugging, git, CI/CD, security, performance and shipping.",
+  "version": "1.0.0",
+  "description": "Engineering habits: API design, CI/CD, debugging, ADRs, git workflow, incremental delivery, performance, security, spec-driven development, and GitHub PR, review and auth skills.",
   "author": {
     "name": "doolecg"
   }

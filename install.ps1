@@ -1,6 +1,6 @@
 # Adds the dooles-skills marketplace to Claude Code and installs its plugins.
 #   .\install.ps1                          everything
-#   .\install.ps1 blockdesigner,minecraft-modding   just those
+#   .\install.ps1 games,minecraft-modding   just those
 # Safe to run again: it refreshes the marketplace and updates what's installed.
 param([string[]] $Plugins)
 

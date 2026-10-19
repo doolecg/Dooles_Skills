@@ -1,29 +1,65 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "dooles-skills",
-  "description": "doolecg's Claude Code skills: BlockDesigner and Claude Agent Viewer releases, voxel icons, Minecraft modding, UI design and how I work, plus a backup of the rest of my skills grouped by theme (Google Workspace, SEO, UX, dev practices, web and cloud, AI and agents, media, games, lessons).",
+  "description": "doolecg's Claude Code skills, organised by what I work on: core working rules, dev practices, agents, web and React Native, UI design and games (Unity, Godot, Blender, pixel art, Minecraft/Java), plus project lessons.",
   "owner": {
     "name": "doolecg",
     "email": "doolecg@gmail.com"
   },
   "plugins": [
     {
-      "name": "blockdesigner",
-      "description": "Release BlockDesigner and its plugins, and scaffold new plugin repos (blockdesigner-release, blockdesigner-plugin-release, blockdesigner-plugin-new).",
-      "category": "development",
-      "source": "./plugins/blockdesigner"
+      "name": "core",
+      "description": "Everyday working rules: how to split work across subagents, plain writing, releases, UI changes, interviews before building, and desktop-app and agent-skill basics. Small enough to leave on.",
+      "category": "productivity",
+      "source": "./plugins/core"
     },
     {
-      "name": "agent-viewer",
-      "description": "Release Claude Agent Viewer: version bump, RELEASE_NOTES.md, launch check, dev branch, tag, MSI build and release check.",
+      "name": "dev-practices",
+      "description": "Engineering habits: API design, CI/CD, debugging, ADRs, git workflow, incremental delivery, performance, security, spec-driven development, and GitHub PR, review and auth skills.",
       "category": "development",
-      "source": "./plugins/agent-viewer"
+      "source": "./plugins/dev-practices"
     },
     {
-      "name": "voxel-icons",
-      "description": "Draw app icons, plugin logos and mod icons as isometric voxel art in the BlockDesigner house style, and write every size a project needs.",
+      "name": "agents",
+      "description": "Working with agents: delegation, session recall, Hindsight, browser automation, project sync, reverse engineering, model migration and skill-library upkeep.",
+      "category": "development",
+      "source": "./plugins/agents"
+    },
+    {
+      "name": "web-mobile",
+      "description": "React Native, TSX, Vite and web work: web-to-React-Native migration, RN web hover bug, frontend UI engineering, browser testing with devtools, cross-platform npm scripts.",
+      "category": "development",
+      "source": "./plugins/web-mobile"
+    },
+    {
+      "name": "ui-design",
+      "description": "UI critique and foundations, accessibility, craft, general design review and UX heuristics.",
       "category": "design",
-      "source": "./plugins/voxel-icons"
+      "source": "./plugins/ui-design"
+    },
+    {
+      "name": "games",
+      "description": "Game work: Unity, Core Keeper and Minecraft modding and servers, voxel and pixel art, humanoid FBX rigs, Steam Workshop uploads and royalty-free asset sourcing.",
+      "category": "development",
+      "source": "./plugins/games"
+    },
+    {
+      "name": "backend",
+      "description": "Backend and dev environment: ASP.NET Core with EF Core and PostgreSQL, plus Docker Compose for the dev database.",
+      "category": "development",
+      "source": "./plugins/backend"
+    },
+    {
+      "name": "game-rendering",
+      "description": "Game rendering: PixiJS v8 isometric views and isometric pixel-art rules.",
+      "category": "development",
+      "source": "./plugins/game-rendering"
+    },
+    {
+      "name": "project-lessons",
+      "description": "Auto-learned one-fact lessons from past sessions (EffectCraft, thumbnail-poc, OpenCode and others).",
+      "category": "development",
+      "source": "./plugins/project-lessons"
     },
     {
       "name": "minecraft-modding",
@@ -66,78 +102,6 @@
       "skills": [
         "./minecraft-multiloader"
       ]
-    },
-    {
-      "name": "minecraft-mod-dev",
-      "description": "General Minecraft mod development: mod APIs (JEI, AE2, Create), dev environments and version migration (from mcpmarket).",
-      "category": "development",
-      "source": "./plugins/minecraft-mod-dev"
-    },
-    {
-      "name": "design",
-      "description": "Critique a UI from a screenshot with a ranked fix list (before/after shots), and design screens from colour, type, spacing and layout fundamentals. For desktop apps, Minecraft mod GUIs and HTML pages.",
-      "category": "design",
-      "source": "./plugins/design"
-    },
-    {
-      "name": "core",
-      "description": "How I work, as skills: team work with subagents, the UI before/after flow, Minecraft test setup, desktop app baseline, general release flow and plain writing.",
-      "category": "productivity",
-      "source": "./plugins/core"
-    },
-    {
-      "name": "ux-design",
-      "description": "UX research and heuristics, AI UX patterns, accessibility, design analysis and extraction, and visual craft.",
-      "category": "design",
-      "source": "./plugins/ux-design"
-    },
-    {
-      "name": "project-lessons",
-      "description": "Auto-learned one-fact lessons from past sessions (EffectCraft, thumbnail-poc, OpenCode and others).",
-      "category": "development",
-      "source": "./plugins/project-lessons"
-    },
-    {
-      "name": "dev-practices",
-      "description": "General engineering workflow: planning, specs, TDD, review, debugging, git, CI/CD, security, performance and shipping.",
-      "category": "development",
-      "source": "./plugins/dev-practices"
-    },
-    {
-      "name": "ai-and-agents",
-      "description": "Hermes Agent, Ollama, MLOps, Hindsight memory, MCP, subagent patterns, computer use and reverse engineering.",
-      "category": "development",
-      "source": "./plugins/ai-and-agents"
-    },
-    {
-      "name": "media-and-docs",
-      "description": "PDF, Word, Excel and slides, OCR, comics, text-to-speech, voice transcription, asset sourcing and web research.",
-      "category": "productivity",
-      "source": "./plugins/media-and-docs"
-    },
-    {
-      "name": "seo-content",
-      "description": "SEO research, content briefs and generation, landing pages, metadata, schema, internal links, PageSpeed and company enrichment.",
-      "category": "productivity",
-      "source": "./plugins/seo-content"
-    },
-    {
-      "name": "web-and-cloud",
-      "description": "Next.js, Prisma, Neon, Supabase, Vercel, VPS deployment, cron and webhooks, GitHub workflows and web-to-native ports.",
-      "category": "development",
-      "source": "./plugins/web-and-cloud"
-    },
-    {
-      "name": "google-workspace",
-      "description": "Google Workspace (Gmail, Calendar, Drive, Sheets, Docs, Chat, Meet) CLI skills, recipes and role personas, plus mail helpers.",
-      "category": "productivity",
-      "source": "./plugins/google-workspace"
-    },
-    {
-      "name": "games",
-      "description": "Minecraft servers, Pokemon player, petdex, Core Keeper, Unity and Steam Workshop skills.",
-      "category": "development",
-      "source": "./plugins/games"
     }
   ]
 }

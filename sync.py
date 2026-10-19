@@ -22,18 +22,8 @@ HOME = Path.home()
 
 # plugin -> [(source folder, skill name in the plugin)]
 SOURCES = {
-    "blockdesigner": [
-        (REPOS / "BlockDesigner/.claude/skills/blockdesigner-release", "blockdesigner-release"),
-        (REPOS / "BlockDesigner/.claude/skills/blockdesigner-plugin-release", "blockdesigner-plugin-release"),
-        (REPOS / "BlockDesigner/.claude/skills/blockdesigner-plugin-new", "blockdesigner-plugin-new"),
-    ],
-    # The Claude Agent Viewer checkout is no longer on this PC; this repo holds the only copy of its release skill.
-    "agent-viewer": [
-        (REPOS / "Claude Agent Viewer/.claude/skills/release", "release"),
-    ],
-    # voxel-icons, core (team-work, ui-change, minecraft-test-setup, desktop-app-baseline, repo-release, plain-writing)
-    # and design (ui-critique, ui-foundations) now live in this repo and are edited here: ~/.claude/skills links to them.
-    "minecraft-mod-dev": [
+    # voxel-icons, minecraft-test-setup and the core and ui-design skills now live in this repo and are edited here: ~/.claude/skills links to them.
+    "games": [
         (HOME / ".claude/skills/Minecraft Mod Dev", "minecraft-mod-dev"),
     ],
 }
@@ -45,7 +35,8 @@ JUNK = shutil.ignore_patterns(
 EXTERNAL = {"fabric-modding", "neoforge-modding", "minecraft-26-1-migration", "minecraft-multiloader"}
 # skills edited in this repo itself; ~/.claude/skills holds links to them, so they are never copied in
 REPO_OWNED = {"team-work", "ui-change", "minecraft-test-setup", "desktop-app-baseline", "repo-release", "plain-writing",
-              "ui-critique", "ui-foundations", "voxel-icons"}
+              "ui-critique", "ui-foundations", "voxel-icons",
+              "aspnet-efcore-postgres", "docker-compose-dev", "pixijs-v8-isometric", "isometric-pixel-art"}
 SKILL_ROOTS = [HOME / ".claude/skills", HOME / ".agents/skills"]  # first one wins on a duplicate name
 
 

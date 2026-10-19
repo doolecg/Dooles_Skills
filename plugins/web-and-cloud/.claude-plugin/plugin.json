@@ -1,7 +1,0 @@
-{
-  "name": "web-and-cloud",
-  "description": "Next.js, Prisma, Neon, Supabase, Vercel, VPS deployment, cron and webhooks, GitHub workflows and web-to-native ports.",
-  "author": {
-    "name": "doolecg"
-  }
-}

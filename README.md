@@ -4,8 +4,8 @@
 
 **One repo for my Claude Code skills, my global rules and my OpenCode worker agents.**
 
-![Skills](https://img.shields.io/badge/skills-353-blue)
-![Plugins](https://img.shields.io/badge/plugins-17-brightgreen)
+![Skills](https://img.shields.io/badge/skills-87-blue)
+![Plugins](https://img.shields.io/badge/plugins-11-brightgreen)
 ![Claude Code](https://img.shields.io/badge/Claude%20Code-marketplace-orange)
 ![OpenCode](https://img.shields.io/badge/OpenCode-compatible-purple)
 
@@ -33,7 +33,7 @@ Install the skills on any PC in one go. Browse, update or turn them off from Cla
 
 ## Quick start
 
-**One click (Windows):** clone this repo and double-click `install.cmd`. It adds the marketplace and installs every plugin. To pick some: `.\install.ps1 blockdesigner,minecraft-modding`.
+**One click (Windows):** clone this repo and double-click `install.cmd`. It adds the marketplace and installs every plugin. To pick some: `.\install.ps1 games,minecraft-modding`.
 
 **Inside Claude Code:**
 
@@ -55,35 +55,30 @@ Useful after that:
 - `claude plugin list` shows what is installed. `claude plugin details <name>@dooles-skills` shows a plugin's skills and their token cost.
 - `claude plugin marketplace update dooles-skills` pulls the latest. Turn on auto-update in `/plugin` under Marketplaces to do it at startup.
 
-Plugin skills are namespaced, for example `/blockdesigner:blockdesigner-release`.
+Plugin skills are namespaced, for example `/core:team-work`.
 
 ## Plugins
 
-| Plugin | Skills | Highlights | Source |
-|---|---|---|---|
-| `core` | 6 | `team-work`, `ui-change`, `repo-release`, `plain-writing`, `minecraft-test-setup`, `desktop-app-baseline` | mine |
-| `blockdesigner` | 3 | `blockdesigner-release`, `blockdesigner-plugin-release`, `blockdesigner-plugin-new` | mine |
-| `agent-viewer` | 1 | `release` | mine (only copy) |
-| `voxel-icons` | 1 | `voxel-icons` | mine |
-| `design` | 2 | `ui-critique`, `ui-foundations` | mine, adapted from [designer-skills](https://github.com/Owl-Listener/designer-skills) (MIT) |
-| `minecraft-modding` | 3 | `fabric-modding`, `neoforge-modding`, `minecraft-26-1-migration` | [siredvin/minecraft-modding-skills](https://github.com/siredvin/minecraft-modding-skills) (MIT), pinned |
-| `minecraft-multiloader` | 1 | `minecraft-multiloader` | [jahrome907/minecraft-agent-skills](https://github.com/jahrome907/minecraft-agent-skills) (MIT), pinned |
-| `minecraft-mod-dev` | 1 | `minecraft-mod-dev` | mcpmarket (copy) |
-| `google-workspace` | 100 | `gws-gmail`, `gws-calendar`, `gws-drive`, `google-sheets-builder` | mine and collected |
-| `ai-and-agents` | 39 | `browser-app-automation`, `computer-use`, `dspy`, `hindsight-integration` | mine and collected |
-| `seo-content` | 37 | `seo-keyword-research`, `content-gen-outline`, `company-enrichment` | mine and collected |
-| `dev-practices` | 35 | `api-and-interface-design`, `debugging-and-error-recovery`, `ci-cd-and-automation` | mine and collected |
-| `project-lessons` | 35 | `to-build-the-github-release-body`, `after-publishing-a-release-find-the` | mine and collected |
-| `ux-design` | 30 | `accessibility`, `ux-heuristics-review`, `journey-mapping`, `dieter-rams-principles` | mine and collected |
-| `web-and-cloud` | 30 | `cron-patterns`, `vps-fastapi-deployment`, `nextjs-development-patterns` | mine and collected |
-| `media-and-docs` | 15 | `docx`, `pdf`, `xlsx`, `ocr-and-documents` | mine and collected |
-| `games` | 14 | `minecraft-bedrock-server`, `minecraft-modpack-server`, `check-the-core-keeper-mod-in-game` | mine and collected |
+| Plugin | Skills | What it covers |
+|---|---|---|
+| `core` | 8 | Everyday rules, small enough to leave on: `team-work`, `plain-writing`, `repo-release`, `ui-change`, `interview-me`, `context-engineering`, `using-agent-skills`, `desktop-app-baseline` |
+| `dev-practices` | 16 | API design, CI/CD, debugging, ADRs, git workflow, performance, security, spec-driven work, GitHub PR, review and auth |
+| `agents` | 13 | Delegation, session recall, Hindsight, browser automation, reverse engineering, model migration, skill-library upkeep, web research |
+| `web-mobile` | 5 | React Native, TSX and Vite: web-to-RN migration, frontend UI engineering, browser testing, cross-platform npm scripts |
+| `ui-design` | 6 | `ui-critique`, `ui-foundations`, `accessibility`, `craft`, `general-design-review`, `ux-heuristics-review` |
+| `games` | 17 | Unity, Core Keeper, Minecraft modding and servers, `pixel-art`, `voxel-icons`, FBX humanoid rigs, Steam Workshop, asset sourcing |
+| `backend` | 2 | ASP.NET Core + EF Core + PostgreSQL, Docker Compose dev database |
+| `game-rendering` | 2 | PixiJS v8 isometric views, isometric pixel-art rules |
+| `project-lessons` | 18 | One-fact lessons from past sessions |
+| `minecraft-modding` | 3 | [siredvin/minecraft-modding-skills](https://github.com/siredvin/minecraft-modding-skills) (MIT), pinned |
+| `minecraft-multiloader` | 1 | [jahrome907/minecraft-agent-skills](https://github.com/jahrome907/minecraft-agent-skills) (MIT), pinned |
+
+Not covered yet: Java (beyond Minecraft), Blender and Godot. Godot and Unity come from the `awesome-gamedev-agent-skills` plugins, which Auto Plugins switches on per project.
 
 Third-party plugins are not copied here. `marketplace.json` points at their original repos, pinned to a commit.
 
 Anthropic's built-in skills and the ones synced to my claude.ai account are not here. They already follow the account.
 
-The BlockDesigner skills call their scripts by path in the BlockDesigner checkout (`F:/PROGRAMMING/REPOS/BlockDesigner/.claude/skills/...`). Use them on a PC that has that checkout.
 
 ## The rules file
 
@@ -120,4 +115,4 @@ git add -A && git commit -m "Sync skills" && git push
 
 - The themed plugins are listed in `themes.json`. `sync.py` copies each named skill in and prints any source skill that is not in a plugin yet.
 - To add a skill of my own, add its folder to `SOURCES` in `sync.py`, or its name to a plugin in `themes.json`. For a new plugin, also add an entry to `.claude-plugin/marketplace.json`. Then run the sync.
-- Skills in `core`, `design` and `voxel-icons` are edited in this repo. `~/.claude/skills/<name>` links to their folders, so `sync.py` does not copy them (they are listed in `REPO_OWNED`).
+- Skills in `core`, `ui-design` and `voxel-icons` are edited in this repo. `~/.claude/skills/<name>` links to their folders, so `sync.py` does not copy them (they are listed in `REPO_OWNED`).

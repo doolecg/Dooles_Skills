@@ -1,6 +1,7 @@
 {
   "name": "games",
-  "description": "Minecraft servers, Pokemon player, petdex, Core Keeper, Unity and Steam Workshop skills.",
+  "version": "1.0.0",
+  "description": "Game work: Unity, Core Keeper and Minecraft modding and servers, voxel and pixel art, humanoid FBX rigs, Steam Workshop uploads and royalty-free asset sourcing.",
   "author": {
     "name": "doolecg"
   }
