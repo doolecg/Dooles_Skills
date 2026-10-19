@@ -106,3 +106,6 @@ Applies in every project, in the terminal and in the Claude desktop app (Code ta
 - Per-project skills may be deleted; don't look for or rely on them (the Operant skills are gone).
 - Always search Hindsight and CodeGraph first, before grep or Read, in every task and every subagent brief.
 - Never use superpowers:brainstorming.
+
+## Links and paths in replies
+Whenever a reply names a file, folder, report, screenshot, image or URL, write the full absolute path or full URL so it is clickable, never a short relative path. Windows paths in full (`E:\REPOS\...\report_1\index.html`), or a `file:///E:/...` link for files a browser should open. Applies to every reply, in every project.
