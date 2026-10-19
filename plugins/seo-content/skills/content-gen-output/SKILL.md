@@ -1,3 +1,7 @@
+---
+name: content-gen-output
+description: "Content Gen: Output Stage. Execute the content writing stage of the content generation pipeline."
+---
 # Content Gen: Output Stage
 
 ## Purpose

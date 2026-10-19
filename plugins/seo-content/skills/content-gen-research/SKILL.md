@@ -1,3 +1,7 @@
+---
+name: content-gen-research
+description: "Content Gen: Research Stage. Execute the research stage of the content generation pipeline."
+---
 # Content Gen: Research Stage
 
 ## Purpose

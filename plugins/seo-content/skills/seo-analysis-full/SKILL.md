@@ -1,3 +1,7 @@
+---
+name: seo-analysis-full
+description: "SEO Analysis Full - Skill. Endpoints to try:"
+---
 # SEO Analysis Full - Skill
 
 ## Trigger

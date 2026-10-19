@@ -1,5 +1,5 @@
 ---
-name: content-planner
+name: content_planner
 description: Transforms keyword clusters from keyword-research-finder into complete SEO page outlines (H1/H2/H3/H4) with format guidance and word count allocation. Generates target URL from domain + primary keyword. Outputs brief as Markdown + Google Doc for handoff to CCE engine (Stage 3). Use when you need to create content structure for SEO pages, organize keyword clusters into logical heading hierarchy, or generate EEAT-aligned outlines for blog posts or landing pages. Accepts keyword_research_output, content_type, word_count_range, brand_id, and serp_analysis_enabled flag. NOTE: FAQs are handled by separate faq_creator skill — do NOT include FAQ questions in the brief.
 ---
 

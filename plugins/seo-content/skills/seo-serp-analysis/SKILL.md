@@ -1,3 +1,7 @@
+---
+name: seo-serp-analysis
+description: "SEO SERP Analysis Skill. Given a target keyword, location, and language, return a structured SERP analysis — ranking patterns, content signals, featured snippet opportunities, and content gap recommendations."
+---
 # SEO SERP Analysis Skill
 
 ## Objective

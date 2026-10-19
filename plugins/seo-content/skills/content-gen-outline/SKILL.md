@@ -1,3 +1,7 @@
+---
+name: content-gen-outline
+description: "Content Gen: Outline Stage. Execute the outline stage of the content generation pipeline."
+---
 # Content Gen: Outline Stage
 
 ## Purpose

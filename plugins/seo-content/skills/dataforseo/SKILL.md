@@ -1,3 +1,7 @@
+---
+name: dataforseo
+description: "DataForSEO Skill. Interact with DataForSEO API v3 for SEO data: SERP queries, keyword rankings, competitor research, and backlink analysis."
+---
 # DataForSEO Skill
 
 Interact with DataForSEO API v3 for SEO data: SERP queries, keyword rankings, competitor research, and backlink analysis.

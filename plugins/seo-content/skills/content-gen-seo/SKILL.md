@@ -1,3 +1,7 @@
+---
+name: content-gen-seo
+description: "Content Gen: SEO Stage. Execute the SEO optimization stage of the content generation pipeline."
+---
 # Content Gen: SEO Stage
 
 ## Purpose

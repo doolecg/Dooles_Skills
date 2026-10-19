@@ -1,3 +1,7 @@
+---
+name: seo-keyword-research
+description: "SEO Keyword Research Skill. Given a set of seed keywords and a target market, produce a structured keyword map — clustered topic groups with search volume, difficulty, CPC, and intent for each keyword."
+---
 # SEO Keyword Research Skill
 
 ## Objective

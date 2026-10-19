@@ -1,3 +1,7 @@
+---
+name: content-gen-strategy
+description: "Content Gen: Strategy Stage. Execute the strategy stage of the content generation pipeline."
+---
 # Content Gen: Strategy Stage
 
 ## Purpose

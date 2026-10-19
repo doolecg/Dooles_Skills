@@ -1,3 +1,7 @@
+---
+name: content-gen-meta
+description: "Content Gen: Meta Stage. Execute the final metadata and polish stage of the content generation pipeline."
+---
 # Content Gen: Meta Stage
 
 ## Purpose

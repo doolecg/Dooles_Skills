@@ -1,3 +1,7 @@
+---
+name: presentation
+description: "Presentation Skill. Create SEO opportunity presentations for new clients by combining DataForSEO keyword data, Companies House company data, and other APIs into a structured slide deck deployed to Vercel."
+---
 # Presentation Skill
 
 Create SEO opportunity presentations for new clients by combining DataForSEO keyword data, Companies House company data, and other APIs into a structured slide deck deployed to Vercel.

@@ -1,3 +1,7 @@
+---
+name: zapier-webhook
+description: "Zapier Webhook Skill. Add to ~/.openclaw/openclaw.json:"
+---
 # Zapier Webhook Skill
 
 **Purpose:** Send structured data to Zapier for multi-service automation (Linear, Google Calendar, Slack, etc.)

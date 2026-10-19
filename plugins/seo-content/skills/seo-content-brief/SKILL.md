@@ -1,3 +1,7 @@
+---
+name: seo-content-brief
+description: "SEO Content Brief Skill. Given a target keyword and SERP analysis data, produce a writer-ready content brief — structured spec covering angle, structure, word count, references, FAQs, and quality signals the writer must hit."
+---
 # SEO Content Brief Skill
 
 ## Objective

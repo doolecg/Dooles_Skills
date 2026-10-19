@@ -1,5 +1,5 @@
 ---
-name: faq-creator
+name: faq_creator
 description: Generates FAQ sections for SEO articles using DataForSEO PAA data, ensuring questions don't duplicate content already in the article. Uses brand context from Google Drive and outputs FAQ markdown + JSON schema for integration with the broader SEO content workflow. Accepts article_text, primary_keyword, brand_id, author_persona, and keywords_to_avoid inputs. Outputs FAQ markdown for Stage 5 and FAQ JSON schema for Stage 7.
 ---
 

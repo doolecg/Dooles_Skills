@@ -1,3 +1,7 @@
+---
+name: content_brief_creator
+description: "content_brief_creator. Creates a structured SEO brief combining keyword clusters, SERP patterns, and recommended page sections."
+---
 # content_brief_creator
 
 ## Purpose

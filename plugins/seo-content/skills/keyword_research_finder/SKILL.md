@@ -1,3 +1,7 @@
+---
+name: keyword_research_finder
+description: "Keyword Research Finder. Identify the full keyword opportunity for a landing page — combining existing coverage, competitor themes, DataForSEO expansion, and search intent signals."
+---
 # Keyword Research Finder
 
 Identify the full keyword opportunity for a landing page — combining existing coverage, competitor themes, DataForSEO expansion, and search intent signals.

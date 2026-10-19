@@ -1,5 +1,5 @@
 ---
-name: schema-markup-generator
+name: schema_markup_generator
 description: Analyze webpages and generate implementation-ready JSON-LD schema markup with built-in validation. Use when needing structured data for SEO rich results, entity clarity for search engines and AI systems, or schema validation/merging. Works autonomously across any industry by detecting HTML signals, scoring confidence, validating against schema.org rules, and prompting only when ambiguity exists.
 ---
 
