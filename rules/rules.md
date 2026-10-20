@@ -69,11 +69,11 @@ Order of priority: my message this turn > this file > skills. Dictated on a phon
 
 ## 3. Token limits
 - Read only what you need: `offset`/`limit` or CodeGraph symbols, not whole files. Never re-read a file you just edited or a result you already have.
-- Big or noisy output (logs, builds, tests, JSON, snapshots, fetched pages, 20+ lines): when context-mode is on, process it in the sandbox (`ctx_execute`, `ctx_batch_execute`, `ctx_fetch_and_index`) and surface only the answer; when it's off, pipe through `head`/`grep`/a script and print only the answer. Use Bash only for short fixed output or to change state.
+- Big or noisy output (logs, builds, tests, JSON, snapshots, fetched pages, 20+ lines): process it in the sandbox (`ctx_execute`, `ctx_batch_execute`, `ctx_fetch_and_index`) and surface only the answer. Use Bash only for short fixed output or to change state.
 - Batch independent tool calls in one turn. No exploratory tool calls "just in case".
 - Keep replies and subagent reports short; ask subagents for conclusions, not file dumps.
 - Don't narrate between tool calls; one line of intent at most.
-- **Plugins are off by default.** Always on at user level: the `dooles-tools` plugins, CodeGraph and Hindsight. Everything else (superpowers, context-mode, caveman, frontend-design, `core`, `dev-practices`, game, Expo, Minecraft, docs) is enabled only for the project and task that needs it, via `enabledPlugins` in that repo's `.claude/settings.local.json` (gitignored) or Auto Plugins, and switched back off when the task is done. A plugin enabled mid-session loads after a restart; tell me. Check cost with `claude plugin details` before adding anything always-on.
+- **Plugins are off by default.** Always on at user level: the `dooles-tools` plugins, CodeGraph, Hindsight, and the token savers caveman and context-mode (anything that makes tokens cheaper stays on). Everything else (superpowers, frontend-design, `core`, `dev-practices`, game, Expo, Minecraft, docs) is enabled only for the project and task that needs it, via `enabledPlugins` in that repo's `.claude/settings.local.json` (gitignored) or Auto Plugins, and switched back off when the task is done. A plugin enabled mid-session loads after a restart; tell me. Check cost with `claude plugin details` before adding anything always-on.
 - Long sessions: compress finished work to one-line conclusions, drop failed attempts, start trimming at about 75% of the window. Switch to a fresh session at a clean task boundary.
 
 ## 4. Auto (what you do without asking)
