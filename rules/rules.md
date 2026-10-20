@@ -86,7 +86,8 @@ Order of priority: my message this turn > this file > skills. Dictated on a phon
 Every subagent re-loads the whole startup context (rules, skills, agents, hooks), so each one costs real tokens. Use subagents only for big or genuinely parallel jobs, or to keep large output out of the main session; do small and sequential jobs in the main session. When you do delegate, size the model to the piece (independent ones in parallel). Don't give two agents the same file at once. Skip subagents when the job is under about 10 tool calls.
 - **Very small** (commit/push, lookups, read/summarise, run build or tests, renames, screenshots): `model: "haiku"` (OpenCode `worker-small`).
 - **Small / normal** (simple edits, docs, one-file fix, tests for existing code, normal bug fix): default Sonnet 5.5 (`worker-medium`).
-- **Hard and UI design** (screens, layouts built to mockups, simulation rules, architecture, multi-file features, tricky debugging): `model: "opus"` (`worker-hard`); say so in one line.
+- **Hard and UI design** (screens, layouts built to mockups, simulation rules, multi-file features, tricky debugging): Sonnet 5.5 (`worker-medium`) first; step up to `model: "opus"` (`worker-hard`) only for architecture or when Sonnet has already failed, and say so in one line.
+- **Cap:** max 3 subagents per job in total (not only 3 at once). If a job seems to need more, stop and tell me why.
 - **Very hard** (big refactor/migration, security-sensitive): ask me first unless I already asked; Opus or main model for the hard part only, follow-up to smaller models.
 - Forks run on the main model, so use a fresh small-model agent for small tasks.
 - Haiku is for mechanical or read-only work only; if it needs judgment or reasoning, bump it to Sonnet. Haiku scouts never edit.
