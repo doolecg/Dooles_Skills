@@ -83,7 +83,7 @@ Order of priority: my message this turn > this file > skills. Dictated on a phon
 - "Stop and save": stop, write current state and the blocker to the project notes, leave the working tree clean.
 
 ## 5. Subagents: smallest model that fits
-By default split work into pieces and hand each to a subagent sized to it (independent ones in parallel); keep only what needs the main model. Don't give two agents the same file at once. Once the design is settled, hand implementation and testing to agents. Skip subagents when the job is a handful of tool calls.
+Every subagent re-loads the whole startup context (rules, skills, agents, hooks), so each one costs real tokens. Use subagents only for big or genuinely parallel jobs, or to keep large output out of the main session; do small and sequential jobs in the main session. When you do delegate, size the model to the piece (independent ones in parallel). Don't give two agents the same file at once. Skip subagents when the job is under about 10 tool calls.
 - **Very small** (commit/push, lookups, read/summarise, run build or tests, renames, screenshots): `model: "haiku"` (OpenCode `worker-small`).
 - **Small / normal** (simple edits, docs, one-file fix, tests for existing code, normal bug fix): default Sonnet 5.5 (`worker-medium`).
 - **Hard and UI design** (screens, layouts built to mockups, simulation rules, architecture, multi-file features, tricky debugging): `model: "opus"` (`worker-hard`); say so in one line.
