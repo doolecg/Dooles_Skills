@@ -45,7 +45,7 @@ Order of priority: my message this turn > this file > skills. Dictated on a phon
 - Plans, designs, checklists as HTML pages, not markdown; tick the checklist off as you go. Game Plan docs open with a short "Read this first" list, numbered headings, one topic per section.
 - Plan briefly, then build. Questions only when the answer changes the work, as multiple choice (up to 4, recommended first). Never use superpowers:brainstorming.
 - Do a little research before designing a feature.
-- Use superpowers for process (systematic-debugging, verification-before-completion, writing-plans, subagent-driven-development, dispatching-parallel-agents) plus my own skills. Per-project skills may be deleted; don't rely on them.
+- Process skills (systematic-debugging, verification-before-completion, writing-plans, subagent-driven-development, dispatching-parallel-agents) come from superpowers, which is off by default; enable it for a project only when a task needs them, otherwise follow the same habits without it. Per-project skills may be deleted; don't rely on them.
 - "Restart and do it all" = the full change in code and packages, not docs or a summary.
 - Every project has exactly two IntelliJ run configs in `.run/*.run.xml`, committed: **Main Run** (builds and runs `main`, exported to `build/main-run`, working tree untouched) and **Dev Run** (builds and runs the working tree). No sandbox/lab configs. Re-check both when startup changes.
 
@@ -69,11 +69,11 @@ Order of priority: my message this turn > this file > skills. Dictated on a phon
 
 ## 3. Token limits
 - Read only what you need: `offset`/`limit` or CodeGraph symbols, not whole files. Never re-read a file you just edited or a result you already have.
-- Big or noisy output (logs, builds, tests, JSON, snapshots, fetched pages, 20+ lines): process it in the sandbox (`ctx_execute`, `ctx_batch_execute`, `ctx_fetch_and_index`) and surface only the answer. Use Bash only for short fixed output or to change state.
+- Big or noisy output (logs, builds, tests, JSON, snapshots, fetched pages, 20+ lines): when context-mode is on, process it in the sandbox (`ctx_execute`, `ctx_batch_execute`, `ctx_fetch_and_index`) and surface only the answer; when it's off, pipe through `head`/`grep`/a script and print only the answer. Use Bash only for short fixed output or to change state.
 - Batch independent tool calls in one turn. No exploratory tool calls "just in case".
 - Keep replies and subagent reports short; ask subagents for conclusions, not file dumps.
 - Don't narrate between tool calls; one line of intent at most.
-- Keep always-on skills and plugins to a minimum. Heavy ones (game engines, Expo, Minecraft, docs) load on demand per project. Check cost with `claude plugin details` before adding anything always-on; leave project plugins disabled at user level for Auto Plugins.
+- **Plugins are off by default.** Always on at user level: the `dooles-tools` plugins, CodeGraph and Hindsight. Everything else (superpowers, context-mode, caveman, frontend-design, `core`, `dev-practices`, game, Expo, Minecraft, docs) is enabled only for the project and task that needs it, via `enabledPlugins` in that repo's `.claude/settings.local.json` (gitignored) or Auto Plugins, and switched back off when the task is done. A plugin enabled mid-session loads after a restart; tell me. Check cost with `claude plugin details` before adding anything always-on.
 - Long sessions: compress finished work to one-line conclusions, drop failed attempts, start trimming at about 75% of the window. Switch to a fresh session at a clean task boundary.
 
 ## 4. Auto (what you do without asking)
@@ -134,3 +134,16 @@ Every subagent re-loads the whole startup context (rules, skills, agents, hooks)
 **Skills marketplace:** my skills are plugins in `doolecg/Dooles_Skills` (`F:\PROGRAMMING\REPOS\Dooles_Skills`, marketplace `dooles-skills`); mods are separate in `doolecg/dooles-tools` (`F:\PROGRAMMING\REPOS\dooles-tools`). Edit skills where they live. After creating or changing one, offer `python sync.py` (new skills added to `SOURCES`), then validate, commit, push. A new plugin must be registered in `marketplace.json`, listed in `README.md` and reflected in `sync.py`.
 
 **Writing and business:** UK rules and GBP for selling, tax, consumer law, copyright, data protection, pricing. Judge side-business profit by money left after my time at an hourly rate vs minimum wage; automate intake, production and checks. When building something like another project, use our own names for its concepts and credit the originals in the README. User-facing text at plain GCSE reading level.
+
+## 9. Anti-slop (applies without loading a skill)
+**Writing** (replies, docs, release notes, store pages, UI text; full list in the `humanizer` skill)
+- Say the plain fact. Cut: "stands as a testament", "pivotal/crucial/vital", "underscores", "showcases", "vibrant", "tapestry", "delve", "landscape", "seamless", "robust", "leverage"; "-ing" tails that add nothing ("highlighting...", "ensuring..."); "not just X, it's Y"; lists of three by reflex; vague "experts say"/"many believe"; "serves as" where "is" works; the same noun renamed each sentence.
+- No em-dash chains, no bold sprinkled through prose, no title-case headings, no emoji, no inline-header bullet lists ("**Speed:** ..."), no "Challenges and future outlook" sections, no "In conclusion" or upbeat closer, no "Great question" or "I hope this helps", no knowledge-cutoff disclaimers, no stacked hedging.
+- Vary sentence length. Have an opinion when asked. Be specific over general. Plain GCSE words.
+
+**UI and web** (full system in the `taste-skill` skill; load it for any public page, landing page or design-led screen)
+- Headlines two lines or fewer at every width, one `h1`, a clear title on the first screen.
+- No eyebrows or pill badges above headings, no gradients, no resting shadows or glows, no glass or blur panels, no thin rules or hairline cards, no index numbering (01/02/03), no tiny letter-spaced uppercase labels, no monospace outside code, no icon-topped feature cards or rows of identical cards, no emoji, gradient blobs or fake grey-bar dashboards, no styled accent word in a headline, no violet/indigo or cream-and-terracotta palette.
+- One ground, one ink, one accent. Max two typefaces, usually one. Separate surfaces by a small tone step, not lines. One dominant real image beats six small ones; no placeholder art. Equal outer margins, section gaps clearly bigger than inner gaps.
+- Removing ornament leaves space; fill it with scale, real content or a real picture, never another ornament.
+- App screens (dashboards, settings, tools) keep the same bans but may use dense layouts, tables and form lines.
