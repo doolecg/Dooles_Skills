@@ -1,8 +1,0 @@
-{
-  "name": "web-mobile",
-  "version": "1.0.0",
-  "description": "React Native, TSX, Vite and web work: web-to-React-Native migration, RN web hover bug, frontend UI engineering, browser testing with devtools, cross-platform npm scripts.",
-  "author": {
-    "name": "doolecg"
-  }
-}

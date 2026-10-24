@@ -1,8 +1,0 @@
-{
-  "name": "game-rendering",
-  "version": "1.0.0",
-  "description": "Game rendering: PixiJS v8 isometric views and isometric pixel-art rules.",
-  "author": {
-    "name": "doolecg"
-  }
-}

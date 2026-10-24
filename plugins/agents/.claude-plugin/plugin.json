@@ -1,8 +1,0 @@
-{
-  "name": "agents",
-  "version": "1.0.0",
-  "description": "Working with agents: delegation, session recall, Hindsight, browser automation, project sync, reverse engineering, model migration and skill-library upkeep.",
-  "author": {
-    "name": "doolecg"
-  }
-}

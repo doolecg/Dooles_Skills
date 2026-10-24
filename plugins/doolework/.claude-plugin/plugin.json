@@ -1,0 +1,12 @@
+{
+  "name": "doolework",
+  "version": "0.7.0",
+  "description": "Lean always-on antislop rules plus condensed process skills: 0-antislop, 1-qa, 2-plan, 3-build, 4-testing, 5-bug, 6-check, 7-review, 8-autoagents, 9-push",
+  "author": {
+    "name": "Doolecg",
+    "email": "doolecg@gmail.com"
+  },
+  "repository": "https://github.com/doolecg/antislop",
+  "license": "MIT",
+  "keywords": ["antislop", "rules", "grilling", "debugging"]
+}

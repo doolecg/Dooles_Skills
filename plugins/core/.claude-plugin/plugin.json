@@ -1,8 +1,0 @@
-{
-  "name": "core",
-  "version": "1.0.0",
-  "description": "Everyday working rules: how to split work across subagents, plain writing, releases, UI changes, interviews before building, and desktop-app and agent-skill basics. Small enough to leave on.",
-  "author": {
-    "name": "doolecg"
-  }
-}

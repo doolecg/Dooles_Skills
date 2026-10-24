@@ -1,121 +1,15 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "dooles-skills",
-  "description": "doolecg's Claude Code skills, organised by what I work on: core working rules, dev practices, agents, web and React Native, UI design and games (Unity, Godot, Blender, pixel art, Minecraft/Java), plus project lessons.",
+  "name": "doole",
+  "description": "Doole's lean Claude Code plugins",
   "owner": {
-    "name": "doolecg",
+    "name": "Doolecg",
     "email": "doolecg@gmail.com"
   },
   "plugins": [
     {
-      "name": "core",
-      "description": "Everyday working rules: how to split work across subagents, plain writing, releases, UI changes, interviews before building, and desktop-app and agent-skill basics. Small enough to leave on.",
-      "category": "productivity",
-      "source": "./plugins/core"
-    },
-    {
-      "name": "dev-practices",
-      "description": "Engineering habits: API design, CI/CD, debugging, ADRs, git workflow, incremental delivery, performance, security, spec-driven development, and GitHub PR, review and auth skills.",
-      "category": "development",
-      "source": "./plugins/dev-practices"
-    },
-    {
-      "name": "agents",
-      "description": "Working with agents: delegation, session recall, Hindsight, browser automation, project sync, reverse engineering, model migration and skill-library upkeep.",
-      "category": "development",
-      "source": "./plugins/agents"
-    },
-    {
-      "name": "web-mobile",
-      "description": "React Native, TSX, Vite and web work: web-to-React-Native migration, RN web hover bug, frontend UI engineering, browser testing with devtools, cross-platform npm scripts.",
-      "category": "development",
-      "source": "./plugins/web-mobile"
-    },
-    {
-      "name": "ui-design",
-      "description": "UI critique and foundations, accessibility, craft, general design review and UX heuristics.",
-      "category": "design",
-      "source": "./plugins/ui-design"
-    },
-    {
-      "name": "games",
-      "description": "Game work: Unity, Core Keeper and Minecraft modding and servers, voxel and pixel art, humanoid FBX rigs, Steam Workshop uploads and royalty-free asset sourcing.",
-      "category": "development",
-      "source": "./plugins/games"
-    },
-    {
-      "name": "backend",
-      "description": "Backend and dev environment: ASP.NET Core with EF Core and PostgreSQL, plus Docker Compose for the dev database.",
-      "category": "development",
-      "source": "./plugins/backend"
-    },
-    {
-      "name": "game-rendering",
-      "description": "Game rendering: PixiJS v8 isometric views and isometric pixel-art rules.",
-      "category": "development",
-      "source": "./plugins/game-rendering"
-    },
-    {
-      "name": "project-lessons",
-      "description": "Auto-learned one-fact lessons from past sessions (EffectCraft, thumbnail-poc, OpenCode and others).",
-      "category": "development",
-      "source": "./plugins/project-lessons"
-    },
-    {
-      "name": "minecraft-modding",
-      "description": "Fabric and NeoForge modding with version-matched APIs, and migrating mods from 1.21.x to 26.1 (from siredvin/minecraft-modding-skills, MIT).",
-      "category": "development",
-      "author": {
-        "name": "minecraft-modding-skills contributors"
-      },
-      "homepage": "https://github.com/siredvin/minecraft-modding-skills",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/siredvin/minecraft-modding-skills.git",
-        "path": "skills",
-        "ref": "main",
-        "sha": "b8e1133597d08eb41ac0d00d5d9555af8c1ba895"
-      },
-      "strict": false,
-      "skills": [
-        "./fabric-modding",
-        "./neoforge-modding",
-        "./minecraft-26-1-migration"
-      ]
-    },
-    {
-      "name": "minecraft-multiloader",
-      "description": "Architectury mods that share one codebase across NeoForge and Fabric, for Minecraft 26.x or 1.21.x (from jahrome907/minecraft-agent-skills, MIT).",
-      "category": "development",
-      "author": {
-        "name": "jahrome907"
-      },
-      "homepage": "https://github.com/jahrome907/minecraft-agent-skills",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/jahrome907/minecraft-agent-skills.git",
-        "path": ".agents/skills",
-        "ref": "main",
-        "sha": "dd57c5a97741cdc0eb5bb3a8f876581a4f09eeb0"
-      },
-      "strict": false,
-      "skills": [
-        "./minecraft-multiloader"
-      ]
-    },
-    {
-      "name": "godot-prompter",
-      "description": "Godot 4.x skills, agents and hooks for GDScript and C#: architecture, UI, state machines, save/load, testing, profiling (from jame581/GodotPrompter, pinned).",
-      "category": "development",
-      "author": {
-        "name": "Jan Mesarc"
-      },
-      "homepage": "https://github.com/jame581/GodotPrompter",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/jame581/GodotPrompter.git",
-        "sha": "bd9d18008fb1fd5919fdc297267048670b6eac1f"
-      }
+      "name": "doolework",
+      "source": "./plugins/doolework",
+      "description": "Lean antislop rules plus condensed superpowers and mattpocock process skills"
     }
   ]
 }
